@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>登录</title>
+        <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="applicable-device" content="mobile">
+        <meta name="format-detection" content="telephone=no">
+        <link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+        <script src="/scripts/im/js/config.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+        <script src="/scripts/model/loginuser.js"></script>
+    </head>
+    <body>
+        <article class="head"><a href=""></a>登 录</article>
+        <form action="/" method="post" class="formst">
+            <div class="indis">
+                <input type="text" id="j-account" autofocus="autofocus" autocomplete="on" placeholder="请输入帐号或者手机号" /><a></a>
+            </div>
+            <div class="indis">
+                <input type="password"  id="j-secret" placeholder="请输入密码" /><a></a>
+            </div>
+            <input type="button" class="subs" value="登  录" id="j-loginBtn" />
+            <p class="forget"><a href="">忘记密码？</a><a href="./register.html" class="regis">注册</a></p>
+        </form>
+        <article class="otcoun">
+            <div class="othel">
+                <h3>其他账号登录</h3>
+                <div>
+                    <a href=""><img src="/patients/styles/images/wei_01.png" alt=""></a>
+                    <a href=""><img src="/patients/styles/images/wei_02.png" alt=""></a>
+                    <a href=""><img src="/patients/styles/images/wei_03.png" alt=""></a>
+                </div>
+            </div>
+        </article>
+        <!--message box-->
+        <div class="messa"><a id="j-errorMsg"></a></div>
+        <script src="/scripts/jquery-1.11.3.min.js"></script>
+        <script src="/scripts/im/js/md5.js"></script>
+        <script src="/scripts/im/js/util.js"></script>
+        <script src="/scripts/bll/login.js"></script>
+    </body>
+</html>

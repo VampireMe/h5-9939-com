@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>昵称</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+<script src="/scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/scripts/japp.js"></script>
+<script type="text/javascript" src="/scripts/japp.ajax.js"></script>
+<script src="/patients/scripts/detail.js"></script>
+</head>
+<body>
+<div class="loading" style="line-height:1.9rem;">loading...</div>
+<div class="maincontent" style="display: none">
+<article class="head"><a href="{backlink}"></a>昵称</article>
+<form action="#" method="post" class="formst chanco">
+	<div class="indis"><input type="text" class="nickname" placeholder="请输入昵称" value="{nickname}"><a></a></div>
+	<input type="button" class="subs baocun" value="保  存">
+</form>
+</div>
+</body>
+</html>
+<script src="/patients/scripts/user/nickname.js"></script>
+

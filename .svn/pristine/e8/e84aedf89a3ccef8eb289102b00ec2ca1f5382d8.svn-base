@@ -1,0 +1,262 @@
+var IM = function (parent, talk_id) {
+    this.ctrl = parent;
+    this.g_talk_id = talk_id;
+    this.open = function () {
+        if (this.validate()) {
+            im_client.init(this.ctrl, this.g_talk_id);
+        }
+    };
+    this.validate = function () {
+        var key_talk_id = 'talk-' + this.g_talk_id;
+        var curr_userid = this.ctrl.userinfo.uid;
+        var curr_talk_info = this.ctrl.cache_talklist[key_talk_id];
+        if (curr_userid == curr_talk_info.sender_uid && parseInt(curr_talk_info.receiver_uid) == 0) {
+            alert('当前问题还没有人认领!');
+            return false;
+        }
+        return true;
+    };
+};
+
+
+/**
+ * 主要业务逻辑相关
+ */
+var im_client = {
+    init: function (ctrl, talks_id) {
+        this.initdata(ctrl, talks_id);
+        this.initnode();
+        this.cache = new Cache();
+        this.sdk = new SDKBridge(this, this.cache,{'token':this.userinfo.token});
+        this.addevent();
+    },
+    initdata: function (ctrl, talks_id) {
+        var key_talk_id = 'talk-' + talks_id;
+        this.parent = ctrl;
+        this.userinfo = ctrl.userinfo;
+        this.g_talks_id = talks_id;
+        this.curr_talkinfo = ctrl.cache_talklist[key_talk_id];
+
+        var receive_uid = this.curr_talkinfo.receiver_uid;
+        var sender_uid = this.curr_talkinfo.sender_uid;
+        var receiver_token = this.curr_talkinfo.receiver_token;
+        var sender_token = this.curr_talkinfo.sender_token;
+
+        var to_accid = this.userinfo.uid == sender_uid ? receive_uid > 0 ? receiver_token : '' : sender_token;
+        if (to_accid.length > 0) {
+            var html = appUI.buildChatContainer();
+            var style = "widht:340px;overflow:hidden;top:-36px;" +
+                    "border-top-right-radius: 5px;" +
+                    "border-top-left-radius: 5px;" +
+                    "-webkit-border-top-right-radius: 5px;" +
+                    "-webkit-border-top-left-radius: 5px;" +
+                    "-moz-border-top-right-radius: 5px;" +
+                    "-moz-border-top-left-radius: 5px;"
+            var pageii = layer.open({
+                type: 1,
+                content: html,
+                style: style,
+                shadeClose: false
+            });
+            this.layer_index = pageii;
+        } else {
+            alert('会话信息获取错误!');
+        }
+    },
+    initnode: function () {
+        
+        this.$div_chat_container = $("#div_chat_container");
+        this.$chatContent = $('#j-chatContent');
+        this.$messageText = $('#j-messageText');
+        this.$sendBtn = $('#j-sendBtn');
+
+        this.$btnClose = $("#btn_close");
+
+        //kick弹窗
+        this.$logoutDialog = $('#j-logoutDialog');
+        this.$closeDialog = $('#j-closeDialog');
+        this.$cancelBtn = $('#j-cancelBtn');
+        this.$okBtn = $('#j-okBtn');
+        this.$mask = $('#j-mask');
+    },
+    addevent: function () {
+        this.$sendBtn.on('click', this.sendTextMessage.bind(this));
+        this.$messageText.on('keydown', this.inputMessage);
+        this.$btnClose.on('click', this.closeLayer.bind(this));
+        this.$okBtn.on('click', this.logout.bind(this));
+
+    },
+    initUI: function () {
+        this.openChatBox(this.curr_to_accid, this.scene);
+    },
+    //断开连接
+    disconnect: function () {
+        this.logout();
+    },
+    uploadFile: function () {
+    },
+    chooseFile: function () {
+    },
+    sendTextMessage: function () {
+    },
+    /**
+     * 同步发送的消息到本地服务器
+     * lc@2016-8-8
+     * @returns {undefined}
+     */
+    sysnMsgLocalServer: function (msg) {
+        var that = this;
+        var msgInfo = {
+            'talks_id': this.g_talks_id, //本地消息id
+            'accid': msg.from, //发送者ID
+            'username': msg.fromNick, //发送者
+            'flag': msg.type, //消息类型
+            'body': msg.text, //消息内容
+            'im_msg_id': msg.idClient,
+            'im_msg_time': msg.time,
+            'from_flag': 1 //用户类型，医生、普通用户
+        };
+        japp.ajax.call('ask.create_talksdetail', {
+            'data': msgInfo,
+            'success': function (ret) {
+                if (ret.code == 200) {
+                    that.parent.update_talk_cache(that.g_talks_id, msgInfo);
+//                    console.log(ret);
+                } else {
+                    alert(ret.message);
+                    return false;
+                }
+            }
+        });
+    },
+    inputMessage: function (e) {
+        var ev = e || window.event,
+                $this = $(this);
+        if ($.trim($this.val()).length > 0) {
+            if (ev.keyCode === 13 && ev.ctrlKey) {
+                $this.val($this.val() + '\r\n');
+            } else if (ev.keyCode === 13 && !ev.ctrlKey) {
+                im_client.sendTextMessage();
+            }
+        }
+    },
+    /**
+     * 点击左边面板，打开聊天框
+     */
+    openChatBox: function (account, scene) {
+    },
+    /**
+     * 获取当前会话消息
+     * @return {void}
+     */
+    getHistoryMsgs: function (scene, account) {
+    },
+    //拿到历史消息后聊天面板UI呈现
+    doChatUI: function (id) {
+        var temp = appUI.buildChatContentUI(id, this.cache);
+        this.$chatContent.html(temp);
+        this.$chatContent.scrollTop(9999);
+        //已读回执UI处理
+        this.markMsgRead(id);
+
+    },
+    getLocalMsgsDone: function (err, data) {
+        if (!err) {
+            var msgs = data.msgs;
+            var defaultmsg = this.createDefaultMsg();
+            msgs.push(defaultmsg);
+            this.cache.addMsgsByReverse(msgs);
+            var id = data.scene + "-" + data.to;
+            var array = getAllAccount(msgs);
+            var that = this;
+            this.checkUserInfo(array, function (argument) {
+                that.doChatUI(id);
+            });
+        } else {
+            alert("获取历史消息失败");
+        }
+    },
+    createDefaultMsg: function () {
+        var msg = {};
+        msg.scene = this.scene;
+        msg.from = this.curr_talkinfo.sender_accid;
+        msg.fromNick = this.userinfo.nickname;
+        msg.to = this.curr_to_accid;// this.curr_talkinfo.receiver_accid;
+        msg.time = this.curr_talkinfo.createtime * 1000;
+        msg.userUpdateTime = msg.time;
+        msg.type = 'text';
+        msg.status = 'success';
+        msg.text = this.curr_talkinfo.subject;
+        return msg;
+    },
+    /**
+     * 处理收到的消息 
+     * @param  {Object} msg 
+     * @return 
+     */
+    doMsg: function (msg) {
+        var that = this,
+                who = msg.to === userUID ? msg.from : msg.to,
+                updateContentUI = function () {
+                    //如果当前消息对象的会话面板打开
+                    if (that.crtSessionAccount === who) {
+                        that.sendMsgRead(who, msg.scene);
+                        var msgHtml = appUI.updateChatContentUI(msg, that.cache);
+                        that.$chatContent.find('.no-msg').remove();
+                        that.$chatContent.append(msgHtml).scrollTop(99999);
+                    }
+                };
+        //非群通知消息处理
+        if (/text|image|file|audio|video|geo|custom|tip/i.test(msg.type)) {
+            this.cache.addMsgs(msg);
+            var account = (msg.scene === "p2p" ? who : msg.from);
+            //用户信息本地没有缓存，需存储
+            if (!this.cache.getUserById(account)) {
+                this.mysdk.getUser(account, function (err, data) {
+                    if (!err) {
+                        that.cache.updatePersonlist(data);
+                        updateContentUI();
+                    }
+                })
+            } else {
+                updateContentUI();
+            }
+        }
+    },
+    logout: function () {
+        delCookie("to_accid");
+        delCookie("scene");
+        delCookie("talks_id");
+    },
+    showEmoji: function () {
+        this.$emNode._$show();
+    },
+    /**
+     * 选择表情回调
+     * @param  {objcet} result 点击表情/贴图返回的数据
+     */
+    cbShowEmoji: function (result) {
+        if (!!result) {
+            var scene = this.crtSessionType,
+                    to = this.crtSessionAccount;
+            // 贴图，发送自定义消息体
+            if (result.type === "pinup") {
+                var index = Number(result.emoji) + 1;
+                content = {
+                    type: 3,
+                    data: {
+                        catalog: result.category,
+                        chartlet: result.category + '0' + (index >= 10 ? index : '0' + index)
+                    }
+                };
+                this.mysdk.sendCustomMessage(scene, to, content, this.sendMsgDone.bind(this));
+            } else {
+                // 表情，内容直接加到输入框
+                this.$messageText[0].value = this.$messageText[0].value + result.emoji;
+            }
+        }
+    },
+    closeLayer: function () {
+        layer.close(this.layer_index);
+    }
+};

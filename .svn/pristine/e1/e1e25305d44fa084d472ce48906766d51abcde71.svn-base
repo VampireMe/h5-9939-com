@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>云信 Web Demo</title>
+        <link rel="stylesheet" href="/scripts/im/css/base.css"/>
+        <link rel="stylesheet" href="/scripts/im/css/animate.css"/>
+        <link rel="stylesheet" href="/scripts/im/css/index.css?v=1"/>
+        <link rel="icon" href="/scripts/im/images/icon.ico" type="image/x-icon"/>
+    </head>
+    <body>
+        <div class="wrapper radius10px">
+            <form action="" method="post" class="m-register">
+                <div class="row tc">
+                    <span class="type">用户名：</span>
+                    <input type="text" class="radius5px box-sizing" style="padding:10px 0 10px 60px" id="username" autofocus="autofocus" autocomplete="on" placeholder="限20位字母或者数字"  maxlength="20" value="im_5xdd"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">Email：</span>
+                    <input type="text" class="radius5px box-sizing" id="email" autofocus="autofocus" autocomplete="on" placeholder="请填写正确email地址" maxlength="30" value="im_5xdd@163.com"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">昵称：</span>
+                    <input type="text" class="radius5px box-sizing" id="nickname" autofocus="autofocus" autocomplete="on" placeholder="限10位汉字、字母或者数字" maxlength="10" value="im_5xdd"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">密码：</span>
+                    <input type="password" class="radius5px box-sizing" id="password" placeholder="6~20位字母或者数字"  maxlength="20" value="aaaaaa"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">确认密码：</span>
+                    <input type="password" class="radius5px box-sizing repassword" id="password1" placeholder="请再次输入密码"  maxlength="20" value="aaaaaa"/>
+                </div>
+                <input type="hidden" id="utype" name="utype" value="1" />
+                <input type="hidden" id="source" name="source" value="3" />
+
+                <div class="row">
+                    <div class="error-msg hide" id="errorMsg">此帐号已存在</div>
+                </div>
+                <div class="row tc">
+                    <button type="button" class="btn btn-login" id="submit">注册</button>
+                </div>
+            </form>
+            <div class="u-redirect"><a href="./index.html">已有帐号？直接登录</a></div>
+        </div>
+        <div class="footer tc">
+            <p class="hide">为了更好地体验本Demo，建议您使用IE10、Chrome、FireFox、Safari、360等主流浏览器。</p>
+            <p>&copy;1997 - 2016 网易公司版权所有</p>
+        </div>
+        <script src="/scripts/jquery-1.11.3.min.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+        <script src="/scripts/im/js/config.js"></script>
+        <script src="/scripts/im/js/md5.js"></script>
+        <script src="/scripts/bll/register.js"></script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script src="js/detail.js"></script>
+</head>
+<body>
+<article class="head closbt"><a href=""></a><a href="" class="close">关闭</a>手足口病</article>
+<article class="fana clearfix"><a class="cup">疾病首页</a><a>专家咨询</a><a>疾病文章</a></article>
+<article class="bocon compl shagin diacl usymt"><h3 class="tinfo">手足口病<span>护理</span></h3><p class="inde">睾丸扭转患者饮食宜忌　(以下资料仅供参考，详细情况询问医生）<br/>
+1、应该多吃新鲜蔬菜与瓜果，增加维生素C等成分摄入，以提高身体抗炎能力。 　<br/>2、多吃清淡食物，避免辛辣刺激性食物，以免引起炎症扩散而不利于健康恢复。<br/>3、少吃猪蹄、鱼汤、羊肉等所谓的"发物"，以免因此而引起发炎部位分泌物增加，炎症进一步浸润扩散和加重症状。<br/>4、少吃猪蹄、鱼汤、羊肉等所谓的"发物"，以免因此而引起发炎部位分泌物增加，炎症进一步浸润扩散和加重症状。<br/>5、少吃猪蹄、鱼汤、羊肉等所谓的"发物"，以免因此而引起发炎部位分泌物增加，炎症进一步浸润扩散和加重症状。</p>
+<a class="shic">分享</a>
+</article>
+
+<a href="javascript:void(0)" class="agmor climo">点击查看更多</a>
+<a href="" class="fimor resea">返回疾病<span>&gt;</span></a>
+<div class="thre"></div>
+<article class="dicon">
+	<h2 class="disre">相关内容</h2>
+	<div class="conra"><a href="">症状</a><a href="">病因</a><a href="">预防</a><a href="">并发症</a><a href="">检查</a><a href="">治疗</a><a href="">护理</a></div>
+</article>
+<!--分享-->
+<div class="oubra disn"></div>
+<div class="sio arsha disn">
+      <div class="cdoer">
+      <article class="shala">
+     <div class="shar"><a href=""><img src="images/wei_01.png" alt=""><p>微信好友</p></a><a href=""><img src="images/wei_04.png" alt=""><p>朋友圈</p></a><a href=""><img src="images/wei_03.png" alt=""><p>新浪微博</p></a><a href=""><img src="images/wei_02.png" alt=""><p>腾讯QQ</p></a></div>
+      </article>
+      </div>
+      <p class="cairet">取消</p>
+      </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="css/style.css" rel="stylesheet"/>
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script src="js/detail.js"></script>
+</head>
+<body>
+<article class="head"><a href=""></a>登 录</article>
+<form action="" method="post" class="formst">
+	<div class="indis"><input type="text" placeholder="手机号" value=""><a></a></div>
+	<div class="indis"><input type="password" placeholder="密码" value=""><a></a></div>
+	<input type="submit" class="subs" value="登  录">
+    <p class="forget"><a href="">忘记密码？</a><a href="" class="regis">注册</a></p>
+</form>
+<article class="otcoun"><div class="othel"><h3>其他账号登录</h3><div><a href=""><img src="images/wei_01.png" alt=""></a><a href=""><img src="images/wei_02.png" alt=""></a><a href=""><img src="images/wei_03.png" alt=""></a></div></div></article>
+<!--message box-->
+<div class="messa"><a>你的用户名或密码有误</a></div>
+</body>
+</html>

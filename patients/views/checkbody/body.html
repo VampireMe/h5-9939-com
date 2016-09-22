@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>健康自查</title>
+        <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="applicable-device" content="mobile">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" type="text/css" href="/patients/styles/css/style.css">
+        
+    </head>
+    <body ontouchstart="">
+        <div class="loading" style="line-height:1.9rem;">loading...</div>
+        
+        <div class="maincontent" class="maincontent" style="display: none">
+            <article class="head"><a href=""></a><span>症状自查</span><a href="" class="setn"></a><a class="clna"></a></article>
+
+            <article class="fasnv">教师（男，39岁）</article>
+            <div class="thre"></div>
+            <article class="pale"><ul class="spla headis"><li><div></div>胸部</li><li><div></div>全身</li><li class="curs"><div></div>头部<span></span><div class="nexsib disn"><a href="">头</a><a href="">脑</a><a href="">眼</a><a href="">咽喉</a><a href="">鼻</a><a href="">耳</a><a href="">口</a><a href="">面部</a></div></li><li><div></div>颈部</li><li><div></div>腹部</li><li><div></div>腰部</li><li><div></div>臀部</li><li><div></div>男性生殖</li><li><div></div>女性生殖</li><li><div></div>上肢</li><li><div></div>下肢</li></ul><div class="plres"><a>侧胸部疼痛</a><a>心悸</a><a>胸痛</a><a>乳房肿块</a><a>胸闷</a><a>呼吸困难</a><a>心率过缓</a><a>腰酸背痛</a><a>侧胸部疼痛</a><a>心悸</a><a>胸痛</a><a>乳房肿块</a><a>侧胸部疼痛</a><a>心悸</a><a>胸痛</a><a>乳房肿块</a><a>胸闷</a><a>呼吸困难</a><a>心率过缓</a><a>腰酸背痛</a><a>侧胸部疼痛</a><a>心悸</a><a>胸痛</a><a>乳房肿块</a></div></article>
+        </div>
+        
+        <a class="retop" href="javascript:scroll(0,0)"></a>
+        <script type="text/javascript">
+            $(function () {
+                //症状自查3，症状自查4头部浮动
+                var def = $('.spla li.curs').offset().top;
+                $(window).scroll(function () {
+
+                    if ($(window).scrollTop() >= def) {
+                        $('.spla li.curs').addClass('cufix');
+                    }
+                    else if ($(window).scrollTop() < def) {
+                        $('.spla li.curs').removeClass('cufix');
+                    }
+                });
+
+            });
+        </script>
+        <!--引入js start-->
+        <script src="/scripts/jquery-1.11.3.min.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+        <script src="/patients/scripts/checkbody/checkbody.body.js"></script>
+        <script src="/patients/scripts/checkbody/detail.js"></script>
+        <!--引入js end-->
+    </body>
+</html>

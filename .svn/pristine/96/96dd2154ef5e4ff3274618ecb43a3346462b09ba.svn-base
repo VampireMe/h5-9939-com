@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script src="js/detail.js"></script>
+</head>
+<body>
+<article class="head closbt"><a href=""></a><a href="" class="close">关闭</a>手足口病</article>
+<article class="fana clearfix"><a class="cup">疾病首页</a><a>专家咨询</a><a>疾病文章</a></article>
+<article class="bocon compl shagin diacl usymt"><h3 class="tinfo">手足口病<span>检查</span></h3><p class="inde">按起病缓急和病程进展，可分为缓进型和急进型，以缓进型多见。<br/>
+一、缓进型高血压<br/>
+1、早期表现：早期多无症状，偶尔体检时发现血压增高，或在精神紧张，情绪激动或劳累后感头晕，头痛，眼花，耳鸣，失眠，乏力，注意力不集中等症状，可能系高级精神功能失调所致，早期血压仅暂时升高，随病程进展血压持续升高，脏器受累。<br/>
+2、脑部表现：头痛，头晕常见，多由于情绪激动，过度疲劳气候变化或停用降压药而诱发，血压急骤升高，剧烈头痛，视力障碍，恶心，呕吐，抽搐，昏迷，一过性偏瘫，失语等。<br/>
+3、心脏表现：早期，心功能代偿，症状不明显，后期，心功能失代偿，发生心力衰竭。<br/>
+4、肾脏表现：长期高血压致肾小动脉硬化，肾功能减退时，可引起夜尿，多尿，尿中含蛋白，管型及红细胞，尿浓缩功能低下，酚红排泄及尿素廓清障碍，出现氮质血症及尿毒症。<br/>
+二、急进型高血压<br/>
+也称恶性高血压，占高血压病的1%，可由缓进型突然转变而来，也可起病，恶性高血压可发生在任何年龄，但以30-40岁为最多见，血压明显升高，舒张压130mmHg以上，有乏力，口渴，多尿等症状，视力迅速减退，眼底有视网膜出血及渗出。</p>
+<a class="shic">分享</a>
+</article>
+
+<a href="javascript:void(0)" class="agmor climo">点击查看更多</a>
+<a href="" class="fimor resea">返回疾病<span>&gt;</span></a>
+<div class="thre"></div>
+<article class="dicon">
+	<h2 class="disre">相关内容</h2>
+	<div class="conra"><a href="">症状</a><a href="">病因</a><a href="">预防</a><a href="">并发症</a><a href="">检查</a><a href="">治疗</a><a href="">护理</a></div>
+</article>
+<!--分享-->
+<div class="oubra disn"></div>
+<div class="sio arsha disn">
+      <div class="cdoer">
+      <article class="shala">
+     <div class="shar"><a href=""><img src="images/wei_01.png" alt=""><p>微信好友</p></a><a href=""><img src="images/wei_04.png" alt=""><p>朋友圈</p></a><a href=""><img src="images/wei_03.png" alt=""><p>新浪微博</p></a><a href=""><img src="images/wei_02.png" alt=""><p>腾讯QQ</p></a></div>
+      </article>
+      </div>
+      <p class="cairet">取消</p>
+      </div>
+</body>
+</html>

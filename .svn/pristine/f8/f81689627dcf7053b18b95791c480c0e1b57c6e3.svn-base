@@ -1,0 +1,10 @@
+<article class="bocon compl shagin diacl usymt">
+    <h3 class="tinfo" portion = "name">
+        {name}
+        <span>的发病原因</span>
+    </h3>
+    <p class="inde" portion = "cause">
+        {cause}
+    </p>
+    <a class="shic">分享</a>
+</article>

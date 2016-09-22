@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>云信 Web Demo</title>
+        <link rel="stylesheet" href="/scripts/im/css/base.css"/>
+        <link rel="stylesheet" href="/scripts/im/css/animate.css"/>
+        <link rel="stylesheet" href="/scripts/im/css/index.css?v=1"/>
+        <link rel="stylesheet" href="/scripts/im/css/add_question.css?v=1"/>
+        <link rel="icon" href="/scripts/im/images/icon.ico" type="image/x-icon"/>
+        <script src="/scripts/im/js/config.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+    </head>
+    <body>
+        <div class="wrapper radius10px">
+            <form action="" method="post" class="m-addquestion">
+                <div class="row tc chat-editor">
+                    <textarea id="j-subject" class="msg-input box-sizing radius5px" rows="1" autofocus="autofocus" maxlength="500" placeholder="请尽可能详细的描述您的问题，以便医生更好、更优质的回答。"></textarea>
+                </div>
+                <div class="row">
+                    <div class="error-msg hide" id="errorMsg">问题不能为空</div>
+                </div>
+                <div class="row tc">
+                    <button type="button" class="btn btn-login" id="submit">提交问题</button>
+                </div>
+            </form>
+        </div>
+        <div class="footer tc">
+            <p></p>
+        </div>
+        <script src="/scripts/jquery-1.11.3.min.js"></script>
+        <script src="/scripts/im/js/md5.js"></script>
+        <script src="/scripts/im/js/util.js"></script>
+        <script src="/scripts/bll/add_question.js?v=1"></script>
+    </body>
+</html>

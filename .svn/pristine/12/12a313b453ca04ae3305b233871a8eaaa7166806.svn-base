@@ -1,0 +1,17 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>dynamic_title</title>
+    <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="applicable-device" content="mobile">
+    <meta name="format-detection" content="telephone=no">
+    <link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+    <script src="/patients/scripts/jquery-1.7.1.min.js"></script>
+    <script src="/scripts/japp.js"></script>
+    <script src="/scripts/japp.ajax.js"></script>
+    <script src="/scripts/japp.helper.js"></script>
+</head>

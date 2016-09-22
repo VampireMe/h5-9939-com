@@ -1,0 +1,14 @@
+<!-- 症状 -->
+
+<article class="bocon compl shagin diacl usymt">
+    <h3 portion = "name">{name}</h3>
+    <h4>典型症状</h4>
+    <div class="hosi" fportion='tsymptom'>
+
+    </div>
+    <h4>症状内容</h4>
+    <p class="inde" portion = "symptom">
+        {symptom}
+    </p>
+    <a class="shic">分享</a>
+</article>

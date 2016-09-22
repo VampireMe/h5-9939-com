@@ -1,0 +1,253 @@
+(function () {
+    var helper = {
+        //与原生程序交互用
+        _protocol: "jiujiu://",
+        //----------------------------------------------
+        //函数名：setCurrEnvironment
+        //说  明：设置当前的运行环境参数,ios or android
+        //----------------------------------------------
+        setCurrEnvironment: function (envFlag) {
+            if (envFlag) {
+                japp.store.set("CurrEnvironment", envFlag.toLowerCase(), 24 * 3600);
+            } else {
+                japp.store.set("CurrEnvironment", "", 24 * 3600);
+            }
+        },
+        //----------------------------------------------
+        //函数名：getCurrEnvironment
+        //说  明：获取当前的环境参数,ios or android
+        //----------------------------------------------
+        getCurrEnvironment: function () {
+            return japp.store.get("CurrEnvironment");
+        },
+        //----------------------------------------------
+        //函数名：setReferrer
+        //说  明：设置来源URL地址
+        //----------------------------------------------
+        setReferrer: function () {
+            var pageName = this.getPageName();
+            if (!this.in_array(pageName, ['reg', 'login'])) {
+                japp.store.setSession('referrer', window.location.href);
+            }
+        },
+        //----------------------------------------------
+        //函数名：getReferrer
+        //说  明：获取来源URL地址
+        //----------------------------------------------
+        getReferrer: function () {
+            return japp.store.getSession('referrer');
+        },
+        /**
+         * 跳转页面,只需要写页面名即可不用写文件扩展名
+         * 参数1 : 页面名称 back() 后退
+         * 参数2 : 参数对象 {"uid":1,"pid":2}
+         */
+        gotoPage: function () {
+            var pageName = arguments[0] || null;
+            var params = arguments[1] || null;
+            if (pageName != "" && pageName != null) {
+                if (pageName == "back()" || pageName == ":back()") {
+                    if (pageName == "back()") {
+                        window.history.back();
+                    } else if (pageName == ":back()") {
+                        window.history.back();
+                        window.parent.history.back();
+                    }
+                    return;
+                }
+                var params_str = "";
+                if (params != null) {
+                    params_str = "?";
+                    if (typeof params == "object") {
+                        for (var i in params) {
+                            params_str += i.trim() + "=" + params[i] + "&";
+                        }
+                        params_str = params_str.substring(0, params_str.length - 1);
+                    }
+                }
+                var env_effect = true;
+                if (pageName.indexOf("(") == 0 && pageName.lastIndexOf(")") > 0) {
+                    //不受环境变量影响
+                    env_effect = false;
+                    pageName = pageName.replace(/\(|\)/g, "");
+                }
+                if (this.getCurrEnvironment() == "ios" && env_effect) {
+                    window.location.href = this._protocol + pageName;
+                } else if (this.getCurrEnvironment() == "android" && env_effect) {
+                    switch (pageName) {
+                        case "login":
+                            //通过安卓抛出的对象调用相关的登录方法
+//                            window.androidObj.login();
+                            break;
+                    }
+                } else {
+                    switch (pageName) {
+                        case "login":
+                            pageName = "/login";
+                            break;
+                    }
+                    window.location.href = pageName + ".html" + params_str;
+                }
+            }
+        },
+        //获取url中指定参数
+        getQueryParam: function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null)
+                return (r[2]);
+            return null;
+        },
+        //获取页面名称不带后缀
+        getPageName: function () {
+            var a = location.href;
+            var b = a.split("/");
+            var c = b.slice(b.length - 1, b.length).toString(String).split(".");
+            return c.slice(0, 1).toString();
+        },
+        // 将数组转化为json格式字符串
+        toJson: function (data) {
+            // body...
+            var json = [];
+            for (var i in data) {
+                var v = String(data[i]);
+                v = v.replace(/['"]/ig, '“');
+                var tmp = '"' + i + '":"' + v + '"';
+                json.push(tmp);
+            }
+            ;
+            return '{' + json.join(',') + '}';
+        },
+        //判断变量、数组、对象是否为空
+        empty: function (v) {
+            switch (typeof v) {
+                case 'undefined' :
+                    return true;
+                case 'string' :
+                    if (v.trim().length == 0)
+                        return true;
+                    break;
+                case 'boolean' :
+                    if (!v)
+                        return true;
+                    break;
+                case 'number' :
+                    if (0 === v)
+                        return true;
+                    break;
+                case 'object' :
+                    if (null === v)
+                        return true;
+                    if (undefined !== v.length && v.length == 0)
+                        return true;
+                    for (var k in v) {
+                        return false;
+                    }
+                    return true;
+                    break;
+            }
+            return false;
+        },
+        //----------------------------------------------
+        //函数名：checkIsLogged
+        //说  明：获取请求的地址
+        //----------------------------------------------
+        checkIsLogged: function (forceLogin) {
+            var uid = japp.store.get('uid');
+            var token = japp.store.get('token');
+            if (uid != null && token != null) {
+                return true;
+            } else {
+                if (forceLogin) {
+                    this.gotoPage("login");
+                } else {
+                    return false;
+                }
+            }
+        },
+        //----------------------------------------------
+        //函数名：checkIsScrollToBottom
+        //说  明：检查页面是否滚到底
+        //----------------------------------------------
+        checkIsScrollToBottom: function () {
+            var scrollTop = $(window).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(window).height();
+            if (scrollTop + windowHeight >= scrollHeight - 50) {
+                return true;
+            }
+            return false;
+        },
+        //----------------------------------------------
+        //函数名：checkIsScrollToTop
+        //说  明：检查页面是否滚到顶
+        //----------------------------------------------
+        checkIsScrollToTop: function () {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop <= 50) {
+                return true;
+            }
+            return false;
+        },
+        // 判断字符串是否在数组中
+        in_array: function (str, arr) {
+            // body...
+            var flag = false;
+            for (var k in arr) {
+                if (arr[k] == str) {
+                    flag = true;
+                    break;
+                }
+            }
+            return flag;
+        },
+        /**
+         * 获取浏览器的名称和版本号信息
+         */
+        getBrowser: function () {
+            var browser = {
+                msie: false,
+                firefox: false,
+                opera: false,
+                safari: false,
+                chrome: false,
+                netscape: false,
+                appname: 'unknown',
+                version: 0
+            }, ua = window.navigator.userAgent.toLowerCase();
+            if (/(msie|firefox|opera|chrome|netscape)\D+(\d[\d.]*)/.test(ua)) {
+                browser[RegExp.$1] = true;
+                browser.appname = RegExp.$1;
+                browser.version = RegExp.$2;
+            } else if (/version\D+(\d[\d.]*).*safari/.test(ua)) { // safari
+                browser.safari = true;
+                browser.appname = 'safari';
+                browser.version = RegExp.$2;
+            }
+            return {'name':browser.appname,'version':browser.version};
+        }
+    };
+    japp.add('helper', helper);
+}());
+
+
+//写cookies 
+function setCookie(name, value) {
+    japp.store.set(name, value, 24 * 3600);
+}
+
+//读取cookies 
+function readCookie(name) {
+    return japp.store.get(name);
+}
+
+//删除cookies 
+function delCookie(name) {
+    japp.store.remove(name);
+}
+
+//跳转到某页
+function gotoPage(pagename) {
+    japp.helper.gotoPage(pagename);
+}
+

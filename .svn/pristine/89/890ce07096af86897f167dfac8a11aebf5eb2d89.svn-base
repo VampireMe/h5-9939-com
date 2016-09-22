@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>意见反馈</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+<script type="text/javascript" src="/patients/scripts/jquery-1.7.1.min.js"></script>
+<script src="/patients/scripts/detail.js"></script>
+</head>
+<body class="bodb">
+<article class="head"><a href=""></a>意见反馈</article>
+<section class="freas">
+	<article class="helat"><img src="/patients/styles/images/doc.png" alt=""><div><p>您的每一条反馈我们都会认真聆听。</p></div></article>
+	<form class="gaite" action="" method="post">
+    	<article class="conar answr">
+            <textarea placeholder="请留下您的宝贵意见，我们将认真对待"></textarea>
+            <p>还需输入20字</p>
+        </article>
+        <div class="telin"><p>请留下您的手机号，我们及时给你联系</p><input type="text" class="txco" placeholder="请输入您的手机号"></div>
+        <input type="submit" value="提交问题">
+    </form>
+</section>
+</body>
+</html>

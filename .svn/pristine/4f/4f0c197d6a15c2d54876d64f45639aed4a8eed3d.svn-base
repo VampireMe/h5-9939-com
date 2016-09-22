@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>健康自查</title>
+        <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="applicable-device" content="mobile">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" type="text/css" href="/patients/styles/css/style.css">
+        
+    </head>
+    <body ontouchstart="">
+        <div class="loading" style="line-height:1.9rem;">loading...</div>
+        
+        <div class="maincontent" class="maincontent" style="display: none">
+            <article class="head"><a href=""></a>健康自诊</article>
+            <section class="sympt">
+                <div class="old yeaid">
+                    <!--<a>30~39岁</a><span></span>-->
+                    <a></a><span></span>
+                </div>
+                <div class="old teac">
+                    <!--<a>教师</a><span></span>-->
+                    <a></a><span></span>
+                </div>
+            </section>
+            <article class="prso">
+                <div class="btns clearfix" view-data="sex">
+                    <span class="sp_01 sp_01c"></span>
+                    <span class="sp_02"></span>
+                </div>
+                <div class="mal" title="男性">
+                    <div class="m_head" title="头部" data-partid="21"></div>
+                    <div class="m_upli" title="上肢" data-partid="36"></div>
+                    <div class="m_brea" title="胸部" data-partid="17"></div>
+                    <div class="m_tumm" title="腰部" data-partid="27"></div>
+                    <div class="m_repro" title="生殖" data-partid="6"></div>
+                    <div class="m_lolim" title="下肢" data-partid="56"></div>
+                </div>
+
+                <div class="mal_02 disn" title="男性">
+                    <div class="m_neck" title="颈部" data-partid="41"></div>
+                    <div class="m_back" title="背部" data-partid="53"></div>
+                    <div class="m_bone" title="骨头" data-partid="13"></div>
+                    <div class="m_waist" title="腰部" data-partid="27"></div>
+                    <div class="m_hip" title="臀部" data-partid="15"></div>
+                    <div class="m_body" title="全身" data-partid="4"></div>
+                </div>
+
+                <div class="fem_01 disn" title="女性">
+                    <div class="f_head" title="头部" data-partid="21"></div>
+                    <div class="f_breas" title="胸部" data-partid="17"></div>
+                    <div class="f_upli" title="上肢" data-partid="36"></div>
+                    <div class="f_repro" title="生殖" data-partid="2"></div>
+                    <div class="f_brea" title="腰部" data-partid="27"></div>
+                    <div class="f_lolim" title="下肢" data-partid="56"></div>
+                </div>
+
+                <div class="fem_02 disn" title="女性">
+                    <div class="f_neck" title="颈部" data-partid="41"></div>
+                    <div class="f_bone" title="骨头" data-partid="13"></div>
+                    <div class="f_back" title="背部" data-partid="53"></div>
+                    <div class="f_waist" title="腰部" data-partid="27"></div>
+                    <div class="f_penq" title="盆腔" data-partid="2"></div>
+                    <div class="f_hip" title="臀部" data-partid="15"></div>
+                    <div class="f_body" title="全身" data-partid="4"></div>
+                </div>
+
+                <a class="fronb">背面</a>
+            </article>
+
+            <article class="arimg"><a class="persi">人体图</a><a>症状列表</a></article>
+            <div class="oubra disn"></div>
+            <div class="agint age disn">
+                <div class="iscanc">
+                    <a class="acali">取消</a>
+                    <a class="confo">确定</a>
+                </div>
+                <div class="plav" view-data="age">
+    <!--                <a data-age="1~12岁">1~12岁</a>
+                    <a data-age="13~18岁">13~18岁</a>
+                    <a data-age="19~29岁" class="defs">19~29岁</a>
+                    <a data-age="30~39岁">30~39岁</a>
+                    <a data-age="40~49岁">40~49岁</a>
+                    <a data-age="50~64岁">50~64岁</a>
+                    <a data-age="65岁以上">65岁以上</a>-->
+                </div>
+            </div>
+
+            <div class="agint work disn">
+                <div class="iscanc">
+                    <a class="acali">取消</a>
+                    <a class="confo">确定</a>
+                </div>
+                <div class="plav" view-data="job">
+    <!--                <a data-job="厨师">厨师</a>
+                    <a data-job="白领">白领</a>
+                    <a data-job="服务员">服务员</a>
+                    <a data-job="白领">白领</a>
+                    <a data-job="教师" class="defs">教师</a>
+                    <a data-job="公务员">公务员</a>
+                    <a data-job="工人">工人</a>
+                    <a data-job="农民">农民</a>-->
+                </div>
+            </div>
+        </div>
+        <!--引入js start-->
+        <script src="/scripts/jquery-1.11.3.min.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+        <script src="/patients/scripts/checkbody/checkbody.index.js"></script>
+        <script src="/patients/scripts/checkbody/detail.js"></script>
+        <!--引入js end-->
+    </body>
+</html>

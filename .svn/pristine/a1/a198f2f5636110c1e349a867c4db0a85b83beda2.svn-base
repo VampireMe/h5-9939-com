@@ -1,0 +1,10 @@
+<article class="bocon compl shagin diacl usymt">
+    <h3 class="tinfo" portion = "name">
+        {name}
+        <span>可能并发哪些疾病？</span>
+    </h3>
+    <p class="inde" portion = "neopathy">
+        {neopathy}
+    </p>
+    <a class="shic">分享</a>
+</article>

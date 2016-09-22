@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script src="js/detail.js"></script>
+</head>
+<body>
+<article class="head closbt"><a href=""></a><a href="" class="close">关闭</a>手足口病</article>
+<article class="fana clearfix"><a class="cup">疾病首页</a><a>专家咨询</a><a>疾病文章</a></article>
+<article class="bocon compl shagin diacl usymt"><h3>手足口病<span>典型症状</span></h3><h4>治疗方式</h4><div class="hosi"><a>感冒</a><a>发烧</a><a>发热</a></div><h4>治疗内容</h4><p class="inde">秋风起，虽然多人感觉更舒适，但对于父母来说就需要注意了。秋冬季温度变化较大，是儿童扁桃体炎发病的高发季节。儿科主任表示，随着近期气温的变化明显，医院门诊接到的因扁桃体炎导致发烧的患儿增多导致发烧的患儿，尤其是抵抗力较弱的儿童，更需要注意护理和防范。秋风起，虽然多人感觉更舒适，但对于父母来说就需要注意了。秋冬季温度变化较大，是儿童扁桃体炎发病的高发季节。儿科主任表示，随着近期气温的变化明显，医院门诊接到的因扁桃体炎导致发烧的患儿增多导致发烧的患儿，尤其是抵抗力较弱的儿童，更需要注意护理和防范。秋风起，虽然多人感觉更舒适，但对于父母来说就需要注意了。秋冬季温度变化较大，是儿童扁桃体炎发病的高发季节。儿科主任表示，随着近期气温的变化明显，医院门诊接到的因扁桃体炎导致发烧的患儿增多导致发烧的患儿，尤其是抵抗力较弱的儿童，更需要注意护理和防范。</p>
+<a class="shic">分享</a>
+</article>
+
+<a href="javascript:void(0)" class="agmor climo">点击查看更多</a>
+<a href="" class="fimor resea">返回疾病<span>&gt;</span></a>
+<div class="thre"></div>
+<article class="dicon">
+	<h2 class="disre">相关内容</h2>
+	<div class="conra"><a href="">症状</a><a href="">病因</a><a href="">预防</a><a href="">并发症</a><a href="">检查</a><a href="">治疗</a><a href="">护理</a></div>
+</article>
+<!--分享-->
+<div class="oubra disn"></div>
+<div class="sio arsha disn">
+      <div class="cdoer">
+      <article class="shala">
+     <div class="shar"><a href=""><img src="images/wei_01.png" alt=""><p>微信好友</p></a><a href=""><img src="images/wei_04.png" alt=""><p>朋友圈</p></a><a href=""><img src="images/wei_03.png" alt=""><p>新浪微博</p></a><a href=""><img src="images/wei_02.png" alt=""><p>腾讯QQ</p></a></div>
+      </article>
+      </div>
+      <p class="cairet">取消</p>
+      </div>
+</body>
+</html>

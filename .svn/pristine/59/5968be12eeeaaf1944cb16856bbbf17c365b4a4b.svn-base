@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="css/style.css" rel="stylesheet"/>
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script src="js/detail.js"></script>
+</head>
+<body>
+<article class="head closbt"><a href=""></a><a href="" class="close">关闭</a>专家咨询</article>
+<article class="fana clearfix"><a>疾病首页</a><a class="cup">专家咨询</a><a>疾病文章</a></article>
+<ul class="docli namtip"><li><img src="images/doc.jpg" alt=""><h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a></li><li><img src="images/doc.jpg" alt=""><h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a></li><li><img src="images/doc.jpg" alt=""><h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a></li></ul>
+<div class="thre"></div>
+<ul class="askan direc"><li><h3><q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什有没有什么忌口有没有什么忌口有没有什么忌口有没有什么忌口？</q></h3><div class="spabs"><h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4><p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p><a href="" class="ask">向TA提问</a></div></li>
+	<li><h3><q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什么忌口？</q></h3><div class="spabs"><h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4><p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p><a href="" class="ask">向TA提问</a></div></li>
+	<li><h3><q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什么忌口？</q></h3><div class="spabs"><h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4><p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p><a href="" class="ask">向TA提问</a></div></li>
+	<li><h3><q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什么忌口？</q></h3><div class="spabs"><h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4><p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p><a href="" class="ask">向TA提问</a></div></li>
+	<li><h3><q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什么忌口？</q></h3><div class="spabs"><h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4><p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p><a href="" class="ask">向TA提问</a></div></li>
+
+</ul>
+<!--<a href="" class="fimor">点击查看更多<span>&gt;</span></a>-->
+
+
+
+</body>
+</html>

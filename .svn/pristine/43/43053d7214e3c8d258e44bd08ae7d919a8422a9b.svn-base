@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/patients/styles/css/flickity-consy.css" media="screen">
+<script type="text/javascript" src="/patients/scripts/detail.js"></script>
+<script src="/patients/scripts/flickity-docs.min.js"></script>
+<script src="/scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/scripts/japp.js"></script>
+<script type="text/javascript" src="/scripts/japp.ajax.js"></script>
+<script type="text/javascript" src="/scripts/japp.helper.js"></script>
+</head>
+<body>
+<article class="head closbt"><a href=""></a>久久公告<a class="sarl"></a></article>
+<div class="loading" style="line-height:1.9rem;">loading...</div>
+<h1 class="titl">{title}</h1>
+<div class="datc">时间：{createtime}<span>来源：</span></div>
+<div class="clear"></div>
+<article class="arle">{content}</article>
+<!--分享-->
+<div class="oubra disn"></div>
+<article class="share disn"><div><a href=""><img src="/patients/styles/images/wei_01.png"><p>微信好友</p></a><a href=""><img src="/patients/styles/images/wei_04.png"><p>朋友圈</p></a><a href=""><img src="/patients/styles/images/wei_03.png"><p>新浪微博</p></a><a href=""><img src="/patients/styles/images/wei_02.png"><p>腾讯QQ</p></a></div><a class="cancle">取消</a></article>
+<script type="text/javascript" src="/patients/scripts/news/notice_detail.js"></script>
+</body>
+</html>

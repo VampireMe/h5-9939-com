@@ -1,0 +1,185 @@
+
+<!--#include virtual = "header.html" -->
+
+<body>
+
+<div class="loading" style="line-height:1.9rem;">loading...</div>
+
+<div class = "maincontent" style="display: none">
+
+    <article class="head closbt" portion = 'name'>
+        <a href="javascript:window.history.go(-1);"></a>
+        <a href="javascript:window.history.go(-1);" class="close">关闭</a>
+        {name}
+    </article>
+
+    <article class="fana clearfix">
+        <a class="cup" id="bread_index">疾病首页</a>
+        <a id="bread_knowledge">疾病知识</a>
+        <a id="bread_article">疾病文章</a>
+    </article>
+
+    <div class="dynamiccontent">
+        <article class="spnic" portion = 'info'>
+            <h3>
+                {name}
+                <span>（别名：{alias}）</span>
+            </h3>
+            <div class="imarr">
+                <a href="">
+                    <img src="{thumb}" alt="{name}"></a>
+                <p>
+                    {description}
+                    <a href="javascript:;" class="jianjie">查看更多</a>
+                </p>
+            </div>
+
+        </article>
+
+        <article class="bocon compl basic espe" portion = 'info'>
+            <p>
+                易感人群：
+                <span>{chuanranfangshi}</span>
+            <p>
+                发病部位：
+                <span fportion = 'part'>
+        </span>
+            <p>
+                挂号科室：
+                <span fportion = 'department'>
+        </span>
+            <p>
+                典型症状：
+                <span fportion = 'symptom'>
+        </span>
+            <p>
+                传染方式：
+                <span>{chuanranfangshi}</span>
+            <p>
+                治疗方法：
+                <span>{treatment}</span>
+            <p>
+                临床检查：
+                <span>{inspect_short}</span>
+            <p>
+                常用药品：
+                <span fportion = 'drug'>
+        </span>
+            </p>
+        </article>
+
+        <div class="thre"></div>
+        <article class="spacu" portion = 'content'>
+            <a href="javascript:;" class="symptom">
+                <img src="/patients/styles/images/sp_01.png" alt="">
+                <h3 portion = 'name'>
+                    {name}
+                    <span>症状</span>
+                </h3>
+                <p>{symptom}</p>
+                <div></div>
+            </a>
+            <a href="javascript:;" class="cause">
+                <img src="/patients/styles/images/sp_02.png" alt="">
+                <h3 portion = 'name'>
+                    {name}
+                    <span>病因</span>
+                </h3>
+                <p>{cause}</p>
+                <div></div>
+            </a>
+            <a href="javascript:;" class="prevent">
+                <img src="/patients/styles/images/sp_03.png" alt="">
+                <h3 portion = 'name'>
+                    {name}
+                    <span>预防</span>
+                </h3>
+                <p>{prevent}</p>
+                <div></div>
+            </a>
+            <a href="javascript:;" class="inspect">
+                <img src="/patients/styles/images/sp_04.png" alt="">
+                <h3 portion = 'name'>
+                    {name}
+                    <span>检查</span>
+                </h3>
+                <p>{inspect}</p>
+                <div></div>
+            </a>
+            <a href="javascript:;" class="treat">
+                <img src="/patients/styles/images/sp_05.png" alt="">
+                <h3 portion = 'name'>
+                    {name}
+                    <span>治疗</span>
+                </h3>
+                <p>{treat}</p>
+                <div></div>
+            </a>
+            <a href="javascript:;" class="food">
+                <img src="/patients/styles/images/sp_06.png" alt="">
+                <h3 portion = 'name'>
+                    {name}
+                    <span>护理</span>
+                </h3>
+                <p>{food}</p>
+                <div></div>
+            </a>
+            <a href="javascript:;" class="neopathy">
+                <img src="/patients/styles/images/sp_07.png" alt="">
+                <h3 portion = 'name'>
+                    {name}
+                    <span>并发症</span>
+                </h3>
+                <p>{neopathy}</p>
+                <div></div>
+            </a>
+        </article>
+
+        <div class="thre"></div>
+        <h2 class="hepla syart" portion = 'name'>
+            {name}
+            <span>知识</span>
+        </h2>
+
+        <ul class="dica" portion = 'allreads'>
+        </ul>
+
+        <a href="{app_domain}/?method=aarticle.list&dname={pinyin_initial}" class="fimor every">点击查看更多</a>
+    </div>
+
+    <div class="thre"></div>
+    <h2 class="hepla">相关内容</h2>
+    <article class="neapa">
+        <a href="javascript:;" class="symptom">症状</a>
+        <a href="javascript:;" class="cause">病因</a>
+        <a href="javascript:;" class="prevent">预防</a>
+        <a href="javascript:;" class="neopathy">并发症</a>
+        <a href="javascript:;" class="inspect">检查</a>
+        <a href="javascript:;" class="treat">治疗</a>
+        <a href="javascript:;" class="food">护理</a>
+    </article>
+    <div class="foot">
+        <a href="">咨询值班医生</a>
+    </div>
+
+    <div class = "share" style="display: none;">
+        <!--#include virtual = "share.html" -->
+    </div>
+
+</div>
+
+<script src="/patients/scripts/config.js"></script>
+<script src="/patients/scripts/disease/tool.js"></script>
+<script src="/patients/scripts/disease/jianjie.js"></script>
+<script src="/patients/scripts/disease/symptom.js"></script>
+<script src="/patients/scripts/disease/cause.js"></script>
+<script src="/patients/scripts/disease/prevent.js"></script>
+<script src="/patients/scripts/disease/neopathy.js"></script>
+<script src="/patients/scripts/disease/inspect.js"></script>
+<script src="/patients/scripts/disease/treat.js"></script>
+<script src="/patients/scripts/disease/food.js"></script>
+<script src="/patients/scripts/disease/index.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title view-title="name">{name}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" type="text/css" href="/patients/styles/css/style.css">
+    </head>
+    <body>
+        <div class="loading" style="line-height:1.9rem;">loading...</div>
+        
+        <div class="maincontent" class="maincontent" style="display: none">
+            <article class="head closbt">
+                <a href=""></a>
+                <a href="" class="close">关闭</a>
+                <div class="css_title" view-title="name">{name}</div>
+            </article>
+            <article class="fana clearfix" view-pinyin="pinyin_initial">
+                <a href="index.html?pinyin={pinyin_initial}">症状首页</a>
+                <a class="cup">症状知识</a>
+                <a href="article.html?pinyin={pinyin_initial}">症状文章</a>
+            </article>
+            <article class="bocon compl shagin diacl usymt">
+                <h3 class="tinfo" view-title="name">{name}<span>预防</span></h3>
+                <p class="inde">{content}</p>
+                <a class="shic">分享</a>
+            </article>
+
+            <a href="javascript:void(0)" class="agmor climo">点击查看更多</a>
+            <div class="thre"></div>
+            <article class="dicon">
+                <h2 class="disre">相关内容</h2>
+                <div class="conra" view-pinyin="pinyin_initial">
+                    <a href="examine.html?pinyin={pinyin_initial}">检查</a>
+                    <a href="cause.html?pinyin={pinyin_initial}">病因</a>
+                    <a href="prevent.html?pinyin={pinyin_initial}">预防</a>
+                    <a href="food.html?pinyin={pinyin_initial}">食疗</a>
+                </div>
+            </article>
+            <div class="foot" view-pinyin="pinyin_initial"><a href="online.html?pinyin={pinyin_initial}">咨询值班医生</a></div>
+            <!--分享-->
+            <div class="oubra disn"></div>
+            <!--引入分享 start-->
+            <!--#include file="/patients/views/include/share.html"-->
+            <!--引入分享 end-->
+            </div>
+        
+        <!--引入js start-->
+        <script src="/scripts/jquery-1.11.3.min.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+        <script src="/patients/scripts/symptom/symptom.prevent.js"></script>
+        <script src="/patients/scripts/symptom/detail.js"></script>
+        <!--引入js end-->
+    </body>
+</html>

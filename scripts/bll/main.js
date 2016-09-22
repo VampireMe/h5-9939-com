@@ -1,0 +1,713 @@
+/**
+ * 主要业务逻辑相关
+ */
+var userUID = '';
+var yunXin = {
+    init: function () {
+        this.validate();
+        this.initNode();
+        this.initEmoji();
+        this.cache = new Cache();
+        this.mysdk = new SDKBridge(this, this.cache);
+        notification.init(this.cache, this.mysdk);
+        this.firstLoadSysMsg = true;
+        this.addEvent();
+    },
+    validate: function () {
+        var user = loginuser.get();
+        if (!user) {
+            japp.helper.gotoPage('/login');
+            return;
+        }
+        this.userinfo = user;
+        userUID = user.accid;
+        token = user.token;
+    },
+    initNode: function () {
+        this.$rightPanel = $('#j-rightPanel');//右侧聊天框
+        this.$chatContent = $('#j-chatContent');
+        this.$messageText = $('#j-messageText');
+        this.$sendBtn = $('#j-sendBtn');
+
+        //修改头像
+        this.$chooseFileBtn = $('#j-msgType');
+        this.$fileInput = $('#j-uploadFile');
+        this.$showEmoji = $('#j-showEmoji');
+
+        //kick弹窗
+        this.$logoutDialog = $('#j-logoutDialog');
+        this.$closeDialog = $('#j-closeDialog');
+        this.$cancelBtn = $('#j-cancelBtn');
+        this.$okBtn = $('#j-okBtn');
+        this.$mask = $('#j-mask');
+    },
+    initEmoji: function () {
+        var that = this,
+                emojiConfig = {
+                    'emojiList': emojiList, //普通表情
+                    'pinupList': pinupList, //贴图
+                    'width': 500,
+                    'height': 300,
+                    'imgpath': '/scripts/rongyun/images/',
+                    'callback': function (result) {
+                        that.cbShowEmoji(result);
+                    }
+                }
+        this.$emNode = new CEmojiEngine($('#emojiTag')[0], emojiConfig);
+        this.$emNode._$hide();
+    },
+    addEvent: function () {
+        this.$closeDialog.on('click', this.hideDialog.bind(this));
+        this.$cancelBtn.on('click', this.hideDialog.bind(this));
+        this.$okBtn.on('click', this.logout.bind(this));
+
+        this.$sendBtn.on('click', this.sendTextMessage.bind(this));
+        this.$messageText.on('keydown', this.inputMessage);
+        this.$chooseFileBtn.on('click', 'a', this.chooseFile.bind(this));
+        this.$showEmoji.on('click', this.showEmoji.bind(this));
+        this.$fileInput.on('change', this.uploadFile.bind(this));
+
+        //我的手机
+        $("#j-chatContent").delegate('.j-mbox', 'click', this.playAudio);
+    },
+    initUI: function () {
+        var curr_to_accid = readCookie("to_accid");
+        var scene = readCookie("scene");
+        var talks_id = readCookie("talks_id");
+        this.g_talks_id = talks_id;
+        this.team_id = curr_to_accid;
+        this.openChatBox(curr_to_accid, scene);
+    },
+    //获取用户信息
+    initInfo: function (obj, team) {
+        this.lockPerson = true;
+        this.lockTeam = true;
+        var array = Object.keys(obj),
+                teamArray = [];
+        for (var i = team.length - 1; i >= 0; i--) {
+            if (!this.cache.hasTeam(team[i])) {
+                teamArray.push(team[i]);
+            }
+        }
+        
+        if (teamArray.length > 0) {
+            this.mysdk.getLocalTeams(teamArray, this.cbInitLocalTeamInfo.bind(this));
+        } else {
+            this.lockTeam = false;
+        }
+        this.mysdk.getUsers(array, this.cbInitInfo.bind(this));
+    },
+    cbInitInfo: function (error, data) {
+        if (!error) {
+            this.cache.setPersonlist(data);
+            this.lockPerson = false;
+            if (this.lockTeam === false) {
+                this.initUI();
+            }
+        } else {
+            alert("获取用户信息失败");
+        }
+
+    },
+    cbInitLocalTeamInfo: function (err, data) {
+        if (!err) {
+            this.cache.addTeamMap(data.teams);
+            this.lockTeam = false;
+            if (this.lockPerson === false) {
+                this.initUI();
+            }
+        } else {
+            alert("获取本地群组失败");
+        }
+    },
+    /**
+     * 多端登录管理
+     * @param  {object} devices 设备
+     * @return {void}       
+     */
+    loginPorts: function (devices) {
+        var pc, mobile;
+        for (var i = devices.length - 1; i >= 0; i--) {
+            if (/iOS|Android|WindowsPhone/i.test(devices[i].type)) {
+                mobile = devices[i];
+            } else if (/PC/i.test(devices[i].type)) {
+                pc = devices[i];
+            }
+        }
+        ;
+        if ((pc && pc.online) || (mobile && mobile.online)) {
+            if ((pc && pc.online) && (mobile && mobile.online)) {
+                this.mysdk.mobileDeviceId = mobile.deviceId;
+                this.mysdk.pcDeviceId = pc.deviceId;
+            } else if (pc && pc.online) {
+                this.mysdk.mobileDeviceId = false;
+                this.mysdk.pcDeviceId = pc.deviceId;
+            } else {
+                this.mysdk.mobileDeviceId = mobile.deviceId;
+                this.mysdk.pcDeviceId = false;
+            }
+        } else {
+            this.mysdk.mobileDeviceId = false;
+            this.mysdk.pcDeviceId = false;
+        }
+    },
+    //断开连接
+    disconnect: function () {
+        delCookie("to_accid");
+        delCookie("scene");
+        delCookie("talks_id");
+        japp.helper.gotoPage("/views/profile/index");
+    },
+    /**
+     * 我的手机
+     */
+    sendToMyPhone: function () {
+        this.openChatBox(userUID, "p2p");
+    },
+    /**
+     * 消息中心
+     */
+    showSysMsgCount: function () {
+        var $node = $("#showNotice .count");
+        var count = this.cache.getSysMsgCount();
+        if (this.$notice.hasClass("hide")) {
+            if (count > 0) {
+                $node.removeClass("hide").text(count);
+            } else {
+                $node.addClass("hide").text(count);
+            }
+        } else {
+            this.cache.setSysMsgCount(0);
+        }
+    },
+    clickNotice: function () {
+        var that = this;
+        this.cache.setSysMsgCount(0);
+        this.showSysMsgCount();
+        if (this.firstLoadSysMsg) {
+            this.mysdk.getLocalSysMsgs(function (error, obj) {
+                if (!error) {
+                    if (obj.sysMsgs.length > 0) {
+                        that.cache.setSysMsgs(obj.sysMsgs);
+                    }
+                    that.firstLoadSysMsg = false;
+                    that.showNotice();
+                } else {
+                    alert("获取系统消息失败");
+                }
+            });
+        } else {
+            this.showNotice();
+        }
+
+    },
+    showNotice: function () {
+        this.buildSysNotice();
+        this.buildCustomSysNotice();
+        this.$notice.removeClass('hide');
+        this.$mask.removeClass("hide");
+        document.documentElement.style.overflow = 'hidden';
+    },
+    buildSysNotice: function () {
+        var data = this.cache.getSysMsgs(),
+                array = [],
+                that = this;
+        //确保用户信息存在缓存中
+        for (var i = 0; i < data.length; i++) {
+            if (!this.cache.getUserById(data[i].from)) {
+                array.push(data[i].from);
+            }
+        }
+        if (array.length > 0) {
+            this.mysdk.getUsers(array, function (err, data) {
+                for (var i = data.length - 1; i >= 0; i--) {
+                    that.cache.setPersonlist(data[i]);
+                }
+                ;
+            })
+        }
+        var html = appUI.buildSysMsgs(data, this.cache);
+        this.$notice.find('.j-sysMsg').html(html);
+    },
+    buildCustomSysNotice: function () {
+        var data = this.cache.getCustomSysMsgs();
+        var html = appUI.buildCustomSysMsgs(data, this.cache);
+        this.$notice.find('.j-customSysMsg').html(html);
+    },
+    hideNotice: function () {
+        this.$notice.addClass('hide');
+        this.$mask.addClass("hide");
+        document.documentElement.style.overflow = '';
+    },
+    changeNotice: function () {
+        var $node = yunXin.$notice;
+        $node.find(".tab li").removeClass("crt");
+        $(this).addClass("crt");
+        if ($(this).attr("data-value") === "sys") {
+            $node.find(".j-sysMsg").removeClass("hide");
+            $node.find(".j-customSysMsg").addClass("hide");
+        } else {
+            $node.find(".j-sysMsg").addClass("hide");
+            $node.find(".j-customSysMsg").removeClass("hide");
+        }
+    },
+    acceptNotice: function () {
+        var $this = $(this),
+                $node = $this.parent(),
+                teamId = $node.attr("data-id"),
+                from = $node.attr("data-from"),
+                type = $node.attr("data-type"),
+                idServer = $node.attr("data-idServer");
+        if (type === "teamInvite") {
+            yunXin.mysdk.acceptTeamInvite(teamId, from, idServer);
+        } else {
+            yunXin.mysdk.passTeamApply(teamId, from, idServer);
+        }
+
+    },
+    rejectNotice: function () {
+        var $this = $(this),
+                $node = $this.parent(),
+                teamId = $node.attr("data-id"),
+                from = $node.attr("data-from"),
+                type = $node.attr("data-type"),
+                idServer = $node.attr("data-idServer");
+        if (type === "teamInvite") {
+            yunXin.mysdk.rejectTeamInvite(teamId, from, idServer);
+        } else {
+            yunXin.mysdk.rejectTeamApply(teamId, from, idServer);
+        }
+    },
+    rmAllSysNotice: function () {
+        var that = this;
+        var type = this.$notice.find(".tab .crt").attr("data-value");
+        if (type === "sys") {
+            this.mysdk.deleteAllLocalSysMsgs(function (err, obj) {
+                if (err) {
+                    alert("删除失败");
+                } else {
+                    that.cache.setSysMsgs([]);
+                    that.buildSysNotice();
+                }
+            })
+        } else {
+            this.cache.deleteCustomSysMsgs();
+            this.buildCustomSysNotice();
+        }
+    },
+    uploadFile: function () {
+        var that = this,
+                scene = this.crtSessionType,
+                to = this.crtSessionAccount,
+                fileInput = this.$fileInput.get(0);
+        if (fileInput.files[0].size == 0) {
+            alert("不能传空文件");
+            return;
+        }
+        this.mysdk.sendFileMessage(scene, to, fileInput, this.sendMsgDone.bind(this));
+    },
+    chooseFile: function () {
+        this.$fileInput.click();
+    },
+    //获取好友备注名或者昵称
+    getNick: function (account) {
+        // 使用util中的工具方法
+        return getNick(account, this.cache);
+    },
+    /**
+     * 列表想内容提供方法（用于ui组件）
+     * @param  {Object} data 数据
+     * @param  {String} type 类型
+     * @return {Object} info 需要呈现的数据
+     */
+    infoProvider: function (data, type) {
+        var info = {};
+        switch (type) {
+            case "session":
+                var msg = data.lastMsg,
+                        scene = msg.scene;
+                info.scene = msg.scene;
+                info.account = msg.target;
+                info.target = msg.scene + "-" + msg.target;
+                info.time = transTime2(msg.time);
+                info.crtSession = this.crtSession;
+                info.unread = data.unread > 99 ? "99+" : data.unread;
+                info.text = buildSessionMsg(msg);
+                if (scene === "p2p") {
+                    //点对点
+                    if (msg.target === userUID) {
+                        info.nick = "我的手机";
+                        info.avatar = "images/myPhone.png";
+                    } else {
+                        var userInfo = this.cache.getUserById(msg.target);
+                        info.nick = this.getNick(msg.target);
+                        info.avatar = getAvatar(userInfo.avatar);
+                    }
+
+                } else {
+                    //群组
+                    var teamInfo = this.cache.getTeamById(msg.target);
+                    if (teamInfo) {
+                        info.nick = teamInfo.name;
+                        if (teamInfo.avatar) {
+                            info.avatar = teamInfo.avatar + "?imageView&thumbnail=40x40&quality=85";
+                        } else {
+                            info.avatar = "images/" + teamInfo.type + ".png";
+                        }
+                    } else {
+                        info.nick = msg.target;
+                        info.avatar = "images/normal.png";
+                    }
+                }
+                break;
+            case "friend":
+                info.target = "p2p-" + data.account;
+                info.account = data.account;
+                info.nick = this.getNick(info.account);
+                info.avatar = getAvatar(data.avatar);
+                info.crtSession = this.crtSession;
+                break;
+            case "team":
+                info.type = data.type;
+                info.nick = data.name;
+                info.target = "team-" + data.teamId;
+                info.teamId = data.teamId;
+                if (data.avatar) {
+                    info.avatar = data.avatar + "?imageView&thumbnail=40x40&quality=85";
+                } else {
+                    info.avatar = info.type === "normal" ? "images/normal.png" : "images/advanced.png";
+                }
+                info.crtSession = this.crtSession;
+                break;
+        }
+        return info;
+    },
+    /**
+     * 导航圆点显示
+     */
+    doPoint: function () {
+    },
+    sendTextMessage: function () {
+        var scene = this.crtSessionType,
+                to = this.crtSessionAccount,
+                text = this.$messageText.val().trim();
+        if (!!to && !!text) {
+            if (text.length > 500) {
+                alert('消息长度最大为500字符');
+            } else if (text.length === 0) {
+                return;
+            } else {
+                this.mysdk.sendTextMessage(scene, to, text, this.sendMsgDone.bind(this));
+            }
+        }
+    },
+    /**
+     * 同步发送的消息到本地服务器
+     * lc@2016-8-8
+     * @returns {undefined}
+     */
+    sysnMsgLocalServer: function (msg) {
+        var errorMsg = '',
+        msgInfo = {
+            'talks_id': this.g_talks_id, //本地消息id
+            'accid': msg.from, //发送者ID
+            'username': msg.fromNick, //发送者
+            'flag': msg.type, //消息类型
+            'body': msg.text, //消息内容
+            'from_flag': 1 //用户类型，医生、普通用户
+        };
+        japp.ajax.call('ask.create_talksdetail', {
+            'data': msgInfo,
+            'success': function (ret) {
+                if (ret.code == 200) {
+                    console.log(ret);
+//                    japp.helper.gotoPage('/scripts/rongyun/main');
+                } else {
+                    errorMsg = ret.message;
+                    return false;
+                }
+            }
+        });
+//        console.log(msgInfo);
+    },
+    /**
+     * 发送消息完毕后的回调
+     * @param error：消息发送失败时，error != null
+     * @param msg：消息主体，类型分为文本、文件、图片、地理位置、语音、视频、自定义消息，通知等
+     */
+    sendMsgDone: function (error, msg) {
+        this.sysnMsgLocalServer(msg);
+//        console.log(this.cache);
+        this.cache.addMsgs(msg);
+        this.$messageText.val('');
+        this.$chatContent.find('.no-msg').remove();
+        var msgHtml = appUI.updateChatContentUI(msg, this.cache);
+        this.$chatContent.append(msgHtml).scrollTop(99999);
+        $('#j-uploadForm').get(0).reset();
+    },
+    inputMessage: function (e) {
+        var ev = e || window.event,
+                $this = $(this);
+        if ($.trim($this.val()).length > 0) {
+            if (ev.keyCode === 13 && ev.ctrlKey) {
+                $this.val($this.val() + '\r\n');
+            } else if (ev.keyCode === 13 && !ev.ctrlKey) {
+                yunXin.sendTextMessage();
+            }
+        }
+    },
+    /**
+     * 点击左边面板，打开聊天框
+     */
+    openChatBox: function (account, scene) {
+        var info;
+        this.mysdk.setCurrSession(scene, account);
+        this.crtSession = scene + "-" + account;
+        this.crtSessionType = scene;
+        this.crtSessionAccount = account;
+
+        //退群的特殊UI
+        this.$rightPanel.find(".u-chat-notice").addClass("hide");
+        this.$rightPanel.find(".chat-mask").addClass("hide");
+        this.$rightPanel.removeClass('hide');
+        this.$messageText.val('');
+
+        //根据帐号跟消息类型获取消息数据
+        if (scene == "p2p") {
+            info = this.cache.getUserById(account);
+        } else {
+            info = this.cache.getTeamById(account);
+            if (info) {
+            } else {
+                //如果不在指定的群中,直接入群,高级群无法查询群成员的个数
+                this.mysdk.applyTeam(account,this.passTeamApply.bind(this));
+                this.$rightPanel.find(".u-chat-notice").removeClass("hide");
+                this.$rightPanel.find(".chat-mask").removeClass("hide");
+            }
+            //点击面板去拿群成员，也可以初始化的时候同步过来，这里提供个示例
+            //可以根据不同需求主动调用这个方法来缓存群成员数据
+            this.getTeamMembers(account);
+        }
+        this.doPoint();
+        // 根据或取聊天记录
+        this.getHistoryMsgs(scene, account);
+    },
+    passTeamApply:function(err, obj){
+    },
+    /**
+     * 主动去拿群列表
+     */
+    getTeamMembers: function (id) {
+        var that = this;
+        if (!this.cache.getTeamMembers(id)) {
+            this.mysdk.getTeamMembers(id, function (err, obj) {
+                that.cache.setTeamMembers(id, obj);
+            });
+        }
+    },
+    /**
+     * 获取当前会话消息
+     * @return {void}
+     */
+    getHistoryMsgs: function (scene, account) {
+        var id = scene + "-" + account;
+        var sessions = this.cache.findSession(id);
+        var msgs = this.cache.getMsgs(id);
+        //标记已读回执
+        this.sendMsgRead(account, scene);
+        if (!!sessions) {
+            if (sessions.unread >= msgs.length) {
+                var msgid = (msgs.length > 0) ? msgs[0].idClient : false;
+                this.mysdk.getLocalMsgs(scene, account, msgid, this.getLocalMsgsDone.bind(this));
+                return;
+            }
+        }
+        this.doChatUI(id);
+    },
+    //拿到历史消息后聊天面板UI呈现
+    doChatUI: function (id) {
+        var temp = appUI.buildChatContentUI(id, this.cache);
+        this.$chatContent.html(temp);
+        this.$chatContent.scrollTop(9999);
+        //已读回执UI处理
+        this.markMsgRead(id);
+    },
+    getLocalMsgsDone: function (err, data) {
+        if (!err) {
+            this.cache.addMsgsByReverse(data.msgs);
+            var id = data.scene + "-" + data.to;
+            var array = getAllAccount(data.msgs);
+            var that = this;
+            this.checkUserInfo(array, function (argument) {
+                that.doChatUI(id);
+            })
+        } else {
+            alert("获取历史消息失败");
+        }
+    },
+    //检查用户信息有木有本地缓存 没的话就去拿拿好后在执行回调
+    checkUserInfo: function (array, callback) {
+        var arr = [];
+        var that = this;
+        for (var i = array.length - 1; i >= 0; i--) {
+            if (!this.cache.getUserById(array[i])) {
+                arr.push(array[i]);
+            }
+        }
+        ;
+        if (arr.length > 0) {
+            this.mysdk.getUsers(arr, function (error, data) {
+                if (!error) {
+                    that.cache.setPersonlist(data);
+                    callback()
+                } else {
+                    alert("获取用户信息失败")
+                }
+            });
+        } else {
+            callback();
+        }
+    },
+    //发送已读回执
+    sendMsgRead: function (account, scene) {
+        if (scene === "p2p") {
+            var id = scene + "-" + account;
+            var sessions = this.cache.findSession(id);
+            this.mysdk.sendMsgReceipt(sessions.lastMsg, function (err, data) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        }
+    },
+    //UI上标记消息已读
+    markMsgRead: function (id) {
+        if (!id || this.crtSession !== id) {
+            return;
+        }
+        var msgs = this.cache.getMsgs(id);
+        for (var i = msgs.length - 1; i >= 0; i--) {
+            var message = msgs[i];
+            // 目前不支持群已读回执
+            if (message.scene === "team") {
+                return;
+            }
+            if (nim.isMsgRemoteRead(message)) {
+                $(".item.item-me.read").removeClass("read");
+                $("#" + message.idClient).addClass("read");
+                break;
+            }
+        }
+    },
+    /**
+     * 处理收到的消息 
+     * @param  {Object} msg 
+     * @return 
+     */
+    doMsg: function (msg) {
+        var that = this,
+                who = msg.to === userUID ? msg.from : msg.to,
+                updateContentUI = function () {
+                    
+                    if(msg.scene==='team' && msg.from!=userUID){
+                        var obj = that.cache.getTeamMembers(msg.to);
+                        if (obj && obj.members) {
+                            for (var i = obj.members.length - 1; i >= 0; i--) {
+                                if (obj.members[i].account != msg.from && obj.members[i].type!='owner') {
+                                    that.mysdk.removeTeamMembers(
+                                            {
+                                                teamId: that.team_id,
+                                                accounts: [obj.members[i].account],
+                                                done: function(error, obj){
+                                                    that.getTeamMembers(that.team_id);
+                                                }
+                                            }
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    //如果当前消息对象的会话面板打开
+                    if (that.crtSessionAccount === who) {
+                        that.sendMsgRead(who, msg.scene);
+                        var msgHtml = appUI.updateChatContentUI(msg, that.cache);
+                        that.$chatContent.find('.no-msg').remove();
+                        that.$chatContent.append(msgHtml).scrollTop(99999);
+                    }
+                };
+        //非群通知消息处理
+        if (/text|image|file|audio|video|geo|custom|tip/i.test(msg.type)) {
+            this.cache.addMsgs(msg);
+            var account = (msg.scene === "p2p" ? who : msg.from);
+            //用户信息本地没有缓存，需存储
+            if (!this.cache.getUserById(account)) {
+                this.mysdk.getUser(account, function (err, data) {
+                    if (!err) {
+                        that.cache.updatePersonlist(data);
+                        updateContentUI();
+                    }
+                })
+            } else {
+                updateContentUI();
+            }
+        } else {
+            // 群消息处理
+            notification.messageHandler(msg, updateContentUI);
+        }
+    },
+    logout: function () {
+        delCookie("to_accid");
+        delCookie("scene");
+        delCookie("talks_id");
+        japp.helper.gotoPage('/index');
+    },
+    showDialog: function () {
+        this.$logoutDialog.removeClass('hide');
+        this.$mask.removeClass('hide');
+    },
+    hideDialog: function () {
+        this.$logoutDialog.addClass('hide');
+        this.$mask.addClass('hide');
+    },
+    showEmoji: function () {
+        this.$emNode._$show();
+    },
+    // 语音播放
+    playAudio: function () {
+        if (!!window.Audio) {
+            var node = $(this),
+                    btn = $(this).children(".j-play");
+            node.addClass("play");
+            setTimeout(function () {
+                node.removeClass("play");
+            }, parseInt(btn.attr("data-dur")))
+            new window.Audio(btn.attr("data-src") + "?audioTrans&type=mp3").play();
+        }
+    },
+    /**
+     * 选择表情回调
+     * @param  {objcet} result 点击表情/贴图返回的数据
+     */
+    cbShowEmoji: function (result) {
+        if (!!result) {
+            var scene = this.crtSessionType,
+                    to = this.crtSessionAccount;
+            // 贴图，发送自定义消息体
+            if (result.type === "pinup") {
+                var index = Number(result.emoji) + 1;
+                content = {
+                    type: 3,
+                    data: {
+                        catalog: result.category,
+                        chartlet: result.category + '0' + (index >= 10 ? index : '0' + index)
+                    }
+                };
+                this.mysdk.sendCustomMessage(scene, to, content, this.sendMsgDone.bind(this));
+            } else {
+                // 表情，内容直接加到输入框
+                this.$messageText[0].value = this.$messageText[0].value + result.emoji;
+            }
+        }
+    }
+};
+yunXin.init();

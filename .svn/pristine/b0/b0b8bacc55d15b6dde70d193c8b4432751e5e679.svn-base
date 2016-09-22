@@ -1,0 +1,81 @@
+/**
+ * Created by gaoqing on 2016/9/13.
+ * 疾病首页
+ */
+
+$('title').html('疾病首页');
+
+var disease_index = {
+    name: {
+        name: null
+    },
+    aparams: {
+        app_domain: document.config.app_domain,
+        pinyin_initial: null
+    },
+    allreads: null,
+    init: function () {
+        japp.ajax.call('adisease.index&dname=tnb', {
+            success: function (datas) {
+                //1、设置基本名称
+                disease_index.name.name = datas.data.disease.name;
+
+                //2、设置疾病的基本信息
+                $('[portion="info"]').render(datas.data.disease);
+                disease_tool.foreach($("[fportion='part']"), '<a>{args}</a>', datas.data.disease.part, 3, 'name');
+                disease_tool.foreach($("[fportion='department']"), '<a>{args}</a>', datas.data.disease.department, 3, 'name');
+                disease_tool.foreach($("[fportion='symptom']"), '<a>{args}</a>', datas.data.disease.tsymptom, 3, 'name');
+                disease_tool.foreach($("[fportion='drug']"), '<a>{args}</a>', datas.data.disease.medicine, 3);
+
+                //3、设置疾病的详细信息
+                $('[portion="content"]').render(datas.data.disease.content_app);
+
+                disease_index.allreads = datas.data.allReads;
+                disease_index.aparams.pinyin_initial = datas.data.disease.pinyin_initial;
+
+                disease_index.render_name();
+                disease_index.bind_all_reads();
+                disease_index.render_alink();
+            }
+        });
+    },
+    render_name: function () {
+        $('[portion="name"]').render(this.name);
+    },
+    bind_all_reads: function () {
+        var html = '';
+        if(this.allreads != null){
+            for (title in this.allreads){
+                var allread = this.allreads[title];
+
+                //设置具体文章 li 部分
+                var inner = '';
+                if(allread != null && allread.length > 0){
+                    for (var i = 0; i < allread.length; i++){
+                        if (i == 2){
+                            break;
+                        }
+                        inner += '<dd>\
+                                        <a href="'+ allread[i].app_url +'">'+ allread[i].title +'</a>\
+                                      </dd>';
+                    }
+                }
+                //组装数据
+                html += '<li>\
+                                    <dl>\
+                                        <dt>'+ title +'</dt>\
+                                        '+inner+'\
+                                    </dl>\
+                                </li>';
+            }
+        }
+        $("[portion='allreads']").html(html);
+    },
+    render_alink: function () {
+        $('[portion="alink"]').render(this.aparams);
+    }
+};
+disease_index.init();
+
+
+

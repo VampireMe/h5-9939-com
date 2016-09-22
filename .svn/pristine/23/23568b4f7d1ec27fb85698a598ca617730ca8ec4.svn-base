@@ -1,0 +1,211 @@
+(function () {
+
+    var talks = function (opt) {
+        this.gethtml = function () {
+            var html = '<div class="item_talks" \n\
+                            data-talks_id="' + opt.id + '" \n\
+                            data-subject="' + opt.subject + '" \n\
+                            data-sender_accid="' + opt.sender_accid + '" \n\
+                            data-sender_name="' + opt.sender_name + '" \n\
+                            data-receiver_accid="' + opt.receiver_accid + '" \n\
+                            data-receiver_name="' + opt.receiver_name + '" \n\
+                            data-begintime="' + opt.begintime + '" \n\
+                            data-endtime="' + opt.endtime + '" \n\
+                            data-createtime="' + opt.createtime + '" \n\
+                            data-state="' + opt.state + '" \n\
+                            data-flag="' + opt.flag + '" \n\
+                            data-team_id="' + opt.team_id + '">';
+            html += opt.subject;
+            html += "</div>";
+            return html;
+        };
+    };
+
+    var profile = {
+        cache_talklist: [],
+        init: function () {
+            this.buildproperty();
+            this.initNode();
+            this.initUI();
+            this.addEvent();
+        },
+        initUI: function () {
+            this.initprofile();
+            this.loadtalks();
+        },
+        initNode: function () {
+            this.$logout = $('#j-logout');
+            this.$userPic = $('#j-userPic');
+            this.$userName = $('#j-userName');
+
+            this.$loadConversations = $('#j-loadConversations');//tab 消息中心
+            this.$msgContainer = $('#c-msglist');//消息列表
+
+            this.$loadContacts = $('#j-loadContacts');//tab 联系人
+            this.$talkContainer = $('#c-talklist');//通话列表
+
+            this.$switchPanel = $('#j-switchPanel');
+
+
+            this.$nickName = $('#j-nickName');
+            this.$logoutDialog = $('#j-logoutDialog');
+            this.$closeDialog = $('#j-closeDialog');
+            this.$cancelBtn = $('#j-cancelBtn');
+            this.$okBtn = $('#j-okBtn');
+            this.$mask = $('#j-mask');
+            this.$friendList = $('.friends');
+
+            //个人信息
+            this.$myInfo = $("#myInfo");
+            //修改头像
+            this.$modifyAvatar = $("#modifyAvatar");
+            //用户信息
+            this.$personCard = $('#personCard');
+
+            this.$addquestion = $("#j-addquestion");
+        },
+        addEvent: function () {
+            var that = this;
+            that.$talkContainer.delegate('.item_talks', 'click', function () {
+                that.openchatdialog.apply(this, [that]);
+            });
+            that.$logout.on('click', this.showDialog.bind(this));
+            that.$closeDialog.on('click', this.hideDialog.bind(this));
+            that.$cancelBtn.on('click', this.hideDialog.bind(this));
+            that.$okBtn.on('click', this.logout.bind(this));
+
+        },
+        //初始化变量
+        buildproperty: function () {
+            loginuser.reset();
+            var user = loginuser.get();// readCookie("userinfo");// {'nickname': 'wangpuqiang', 'avatar': ''};
+            if (!user) {
+                japp.helper.gotoPage('/login');
+                return;
+            }
+            this.userinfo = user;
+        },
+        //----------------------------------------------
+        //函数名：initprofile
+        //说  明：初始化用户个人信息
+        //----------------------------------------------
+        initprofile: function () {
+            this.$userName.text(this.userinfo.nickname);
+            this.$userPic.attr('src', this.userinfo.avatar);
+            this.loadbtns();
+        },
+        //加载未读信息
+        loadbtns: function () {
+            if (parseInt(this.userinfo.utype) == 1) {
+                this.$addquestion.show();
+            }
+        },
+        //加载通话信息
+        loadtalks: function () {
+            var that = this;
+            var accid = that.userinfo.accid;
+            var pageindex = 0;
+            var pagesize = 10;
+            var offset = pageindex * pagesize;
+            var data = {
+                'offset': offset,
+                'size': pagesize
+            };
+            if (that.userinfo.utype == 2) {
+//                data['receiver_accid'] = accid;
+                data['state'] = [0, 1];
+            } else {
+                data['sender_accid'] = accid;
+                data['state'] = [1, 2];
+            }
+
+            japp.ajax.call('ask.gettalks', {
+                'data': data,
+                'beforeSend': function () {
+                    that.$talkContainer.html('正在获取数据...');
+                },
+                'success': function (ret) {
+                    if (ret.code == 200) {
+                        //绑定会话问题
+                        var lists = ret.data;
+                        var len = lists.length;
+                        that.$talkContainer.html('');
+                        if (len > 0) {
+                            for (var i = 0; i < len; i++) {
+                                var row = lists[i];
+                                var key_talk_id = 'talk-' + row.id;
+                                that.cache_talklist[key_talk_id] = row;
+                                var t = new talks(row);
+                                that.$talkContainer.append(t.gethtml());
+                            }
+                        }
+                    } else {
+                        return false;
+                    }
+                },
+                error: function () {
+                    console.log('请求失败，请重试');
+                }
+            });
+        },
+        //开始IM聊天
+        openchatdialog: function (that) {
+            var flag = parseInt($(this).attr("data-flag"));
+            var receive_id = $(this).attr("data-receiver_accid");
+            var sender_accid = $(this).attr("data-sender_accid");
+            //点对点
+            var talks_id = parseInt($(this).attr("data-talks_id"));
+            switch (flag) {
+                case 1:
+                {
+                    var im = new IM(that, talks_id);
+                    im.open();
+                    return;
+                    var to_accid = that.userinfo.accid == receive_id ? sender_accid : receive_id;
+                    setCookie("to_accid", to_accid);
+                    setCookie("scene", 'p2p');
+                    setCookie("talks_id", talks_id);
+                    japp.helper.gotoPage('/html/im/main');
+                    break;
+                }
+                case 2:
+                {
+                    var im = new IM(that, talks_id);
+                    im.open();
+                    return;
+                    if (receive_id.length > 0) {
+                        var to_accid = that.userinfo.accid == receive_id ? sender_accid : receive_id;
+                        setCookie("to_accid", to_accid);
+                        setCookie("scene", 'p2p');
+                    } else {
+                        //群组
+                        var team_id = $(this).attr("data-team_id");
+                        setCookie("to_accid", team_id);
+                        setCookie("scene", 'team');
+                    }
+                    setCookie("talks_id", talks_id);
+                    japp.helper.gotoPage('/html/im/main');
+                    break;
+                }
+            }
+        },
+        logout: function () {
+            loginuser.logout();
+            japp.helper.gotoPage('/index');
+        },
+        showDialog: function () {
+            this.$logoutDialog.removeClass('hide');
+            this.$mask.removeClass('hide');
+        },
+        hideDialog: function () {
+            this.$logoutDialog.addClass('hide');
+            this.$mask.addClass('hide');
+        },
+        update_talk_cache: function (talk_id,msg_info) {
+            var key_talk_id = 'talk-' + talk_id;
+            var curr_talk_info = this.cache_talklist[key_talk_id];
+            this.cache_talklist[key_talk_id].endtime = msg_info.im_msg_time;
+        }
+    };
+    profile.init();
+})();

@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>重置密码</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="/patients/styles/css/style.css">
+</head>
+<body class="bodb">
+<article class="head"><a href=""></a>重置密码</article>
+<div class="fipro"><div><p>成功设置新密码！</p><p class="remem">5秒后自动返回登录页</p></div></div>
+<div class="lolay"><a href="">登  录</a><a href="">注  册</a></div>
+</body>
+</html>

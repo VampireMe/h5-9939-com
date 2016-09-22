@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/patients/styles/css/flickity-consy.css" media="screen">
+<script src="/scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/scripts/japp.js"></script>
+<script type="text/javascript" src="/scripts/japp.ajax.js"></script>
+<script type="text/javascript" src="/scripts/japp.helper.js"></script>
+<script src="/patients/scripts/flickity-docs.min.js"></script>   
+<script type="text/javascript" src="/patients/scripts/detail.js"></script>
+</head>
+<body>
+<article class="head closbt"><a href=""></a><a class="conc"></a><a class="sarl"></a></article>
+<div class="loading" style="line-height:1.9rem; z-index: 999;">loading...</div>
+<div class="maincontent" style="display:; position: fixed; background: #fff; width: 100%; height: 100%; z-index: 998;"></div>
+<h1 class="titl">{title}</h1>
+<div class="datc"><a class="max">T<sup>+</sup></a>时间：{inputtime}<span>来源：{copyfrom}</span></div>
+<div class="clear"></div>
+<article class="arle">{content}</article>
+<div class="thre"></div>
+
+<article class="cagre"><a></a><p>非常赞</p><p>37人已赞</p></article>
+<div class="imsh"><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""><img src="/patients/styles/images/nim.jpg" alt=""></div>
+<p class="read">阅读23456</p>
+<div class="thre"></div>
+<h2 class="rec gren gues">猜你还喜欢：</h2>
+<ul class="infoli gallery js-flickity reput carcon necon"  data-flickity-options='{ "wrapAround": true }'>
+	<li class="gallery-cell" style="left:78.5%;"><a href=""><img src="/patients/styles/images/inf.jpg" alt=""><div><h3>1得了手足口病，饮食上需要注意什么注意什么?</h3><p><span>母婴</span><span>2016-6-25</span></p></div></a></li>
+    <li class="gallery-cell"><a href=""><img src="/patients/styles/images/inf.jpg" alt=""><div><h3>2饮食上需要注意什么注意什么?</h3><p><span>母婴</span><span>2016-6-25</span></p></div></a></li>
+    <li class="gallery-cell"><a href=""><img src="/patients/styles/images/inf.jpg" alt=""><div><h3>3得了手足口病，饮食上需要注意什么饮食上需要注意什么注意什么注意什么?</h3><p><span>母婴</span><span>2016-6-25</span></p></div></a></li>
+    <li class="gallery-cell"><a href=""><img src="/patients/styles/images/inf.jpg" alt=""><div><h3>4得了手足口病，饮食上需要注意什么注意什么?</h3><p><span>母婴</span><span>2016-6-25</span></p></div></a></li></ul>
+<div class="thre"></div>
+
+<h2 class="rec gren">相关内容</h2>
+<article class="reart">
+</article>
+
+<!--分享-->
+<div class="oubra disn"></div>
+<article class="share disn"><div><a href=""><img src="/patients/styles/images/wei_01.png"><p>微信好友</p></a><a href=""><img src="/patients/styles/images/wei_04.png"><p>朋友圈</p></a><a href=""><img src="/patients/styles/images/wei_03.png"><p>新浪微博</p></a><a href=""><img src="/patients/styles/images/wei_02.png"><p>腾讯QQ</p></a></div><a class="cancle">取消</a></article>
+<!--message box-->
+<div class="messa hides disn"><a>收藏成功</a></div>
+
+<script type="text/javascript">
+    (function(){
+        var article_detail = {
+            init:function(){
+              this.articleData();
+            },
+            articleData:function(){
+                var id = japp.helper.getQueryParam('id');
+                var data ={
+			'id': id,
+		};
+		var that = this;
+		japp.ajax.call('news.getArticleDetail',{
+                    'data': data,
+                    'beforeSend': function () {},
+                    'success': function (ret) {
+                            if(ret.code==200){
+                                that.changepage(ret.data.detail);
+                                that.relatedAppend(ret.data.related);
+                                that.aaa();
+                            }else{
+                                return false;
+                            }
+                    },
+                    error: function () {
+                        console.log('请求失败，请重试');
+                    }
+		});
+            },
+            aaa:function(){
+                $(".loading").hide();
+                $(".maincontent").hide();
+//                var head = $("head").remove("script[role='reload']");
+//                $("<scri" + "pt>" + "</scr" + "ipt>").attr({ role: 'reload', src: '/patients/scripts/flickity-docs.min.js', type: 'text/javascript' }).appendTo(head);
+                
+            },
+            changepage:function(info){
+                info.inputtime = japp.helper.date('Y-m-d',info.inputtime);
+                $(".titl").render(info);
+                $(".datc").render(info);
+                $(".arle").render(info);
+            },
+            relatedAppend:function(ret){
+                if(ret!=''){
+                    var html ='';
+                    $.each(ret, function(k,val){
+                        html +='<a href="">'+val.title+'</a>';
+                    });
+                    $(".reart").append(html);
+                }
+            },
+        }
+        article_detail.init();
+    }())
+</script>
+</body>
+</html>

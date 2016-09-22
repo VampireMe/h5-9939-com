@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title view-title="name">{name}</title>
+        <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="applicable-device" content="mobile">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" type="text/css" href="/patients/styles/css/style.css">
+    </head>    
+    <body>
+        <div class="loading" style="line-height:1.9rem;">loading...</div>
+        
+        <div class="maincontent" class="maincontent" style="display: none">
+            <article class="head closbt">
+                <a href=""></a>
+                <a href="" class="close">关闭</a>
+                <div class="css_title" view-title="name">{name}</div>
+            </article>
+            <article class="fana clearfix" view-pinyin="pinyin_initial">
+                <a href="/patients/views/symptom/index.html?pinyin={pinyin_initial}">症状首页</a>
+                <a href="/patients/views/symptom/online.html?pinyin={pinyin_initial}" class="cup">专家咨询</a>
+                <a href="/patients/views/symptom/article.html?pinyin={pinyin_initial}">症状文章</a>
+            </article>
+            <ul class="docli namtip" view-doctor="leftdoctor">
+            </ul>
+            <div class="thre"></div>
+            <ul class="askan direc" view-questions="questions">
+                
+<!--<li>
+    <h3>
+        <q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什有没有什么忌口有没有什么忌口有没有什么忌口有没有什么忌口？</q>
+    </h3>
+    <div class="spabs">
+        <h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4>
+        <p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+            出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p>
+        <a href="" class="ask">向TA提问</a>
+    </div>
+</li>-->
+                            
+<!--                <li><h3><q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什么忌口？</q></h3><div class="spabs"><h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4><p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+                            出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p><a href="" class="ask">向TA提问</a></div></li>
+                <li><h3><q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什么忌口？</q></h3><div class="spabs"><h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4><p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+                            出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p><a href="" class="ask">向TA提问</a></div></li>
+                <li><h3><q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什么忌口？</q></h3><div class="spabs"><h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4><p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+                            出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p><a href="" class="ask">向TA提问</a></div></li>
+                <li><h3><q>医生，您好！得了<span>口唇疱疹</span>，饮食上需要注意什么呢？有没有什么忌口？</q></h3><div class="spabs"><h4><img src="images/doc.jpg" alt=""><b>张晓晓</b><span>主任医师</span></h4><p>出现手足口病是病毒感染引起的疾病，可以使用阿昔
+                            出现手足口病是病毒感染引起的疾病，可以使用阿出现手足口病是病毒感染引起的疾病出现手足口病是病毒感染引起的疾病</p><a href="" class="ask">向TA提问</a></div></li>-->
+
+            </ul>
+            <!--<a href="" class="fimor">点击查看更多<span>&gt;</span></a>-->
+
+        </div>
+        
+        <!--引入js start-->
+        <script src="/scripts/jquery-1.11.3.min.js"></script>
+        <script src="/scripts/template.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+        <script src="/patients/scripts/symptom/symptom.online.js"></script>
+        <script src="/patients/scripts/symptom/detail.js"></script>
+        <!--引入js end-->
+    </body>
+</html>

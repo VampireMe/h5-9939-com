@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/detail.js"></script>
+</head>
+<body>
+<article class="head"><a href=""></a>重置密码</article>
+<div class="sepass"><p>验证成功，设置新密码！</p></div>
+<form action="" method="post" class="formst suinf regit">
+	<div class="indis caba"><input type="password" placeholder="新密码" value="" class="psd"><a></a></div>
+    <div class="indis caba"><input type="password" placeholder="重新输入" value="" class="psd"><a></a></div>
+	<input type="submit" class="subs" value="确   认">
+    <!--<p class="forget"><a href="" class="regis">登录</a><a href="" class="regis">注册</a></p>-->
+</form>
+<!--message box-->
+<div class="messa"><a>两次输入密码不一致，请重新输入</a></div>
+</body>
+</html>

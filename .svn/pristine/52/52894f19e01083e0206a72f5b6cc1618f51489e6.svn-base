@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>h5页面测试</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="/scripts/jquery-1.10.2.min.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <style type="text/css">
+            .left{
+                text-align: left;
+            }
+            .left font{
+                color:red;
+            }
+            .right{
+                text-align: right;
+            }
+            .right font{
+                color:#53af21;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box news" id="div_show_message" style="border:1px solid #ededed;width:500px;height:400px;">
+        </div>
+        <div style="width:500px;text-align: left;">
+            <input type="text" id="txt_msg" name="txt_msg"  /><input type="button"  id="btn_send" name="btn_send"  data-flag="0"  value="用户说"  /><input type="button"  id="btn_send_doc" name="btn_send_doc" data-flag="1" value="医生说"  />
+        </div>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+        <script src="/scripts/japp.msg.js"></script>
+        <script type="text/javascript">
+            japp.helper.gotoPage('/login');
+        </script>
+    </body>
+</html>

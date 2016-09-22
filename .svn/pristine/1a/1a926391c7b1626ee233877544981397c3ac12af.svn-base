@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人中心</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+<script src="/scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/scripts/japp.js"></script>
+</head>
+<body>
+<div class="loading" style="line-height:1.9rem;">loading...</div>
+<div class="maincontent" style="display: none">
+<article class="head cabot">个人中心</article>
+<section class="person"><img src="{pic}" alt=""><p>{nickname}</p></section>
+<section class="caninf myans">
+<a href="/patients/views/user/question.html"><span></span>我的提问</a>
+<a href="/patients/views/user/doctor.html" class="clcon"><span></span>我的医生</a>
+<div class="thre catop"></div>
+<a href="/patients/views/user/collection.html"><span></span>我的收藏</a>
+<a href="/patients/views/user/system.html"><span></span>系统设置</a>
+<a href="/patients/views/user/feedback.html"><span></span>意见反馈</a>
+</section>
+<footer><a href=""><div></div><p>首页</p></a><a href=""><div></div><p>资讯</p></a><a href=""><div></div><p></p></a><a href=""><div></div><p>消息</p></a><a href="" class="curr"><div></div><p>我的</p></a><div class="asdo"><a href="">问 医</a></div></footer>
+</div>
+</body>
+<script type="text/javascript" src="/patients/scripts/user/center.js"></script>
+</html>
+

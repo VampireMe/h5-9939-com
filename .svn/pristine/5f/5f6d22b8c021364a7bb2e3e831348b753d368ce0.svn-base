@@ -1,0 +1,105 @@
+var addquestion = {
+    init: function () {
+        this.checkLogin();
+        this.initNode();
+        this.addEvent();
+    },
+    initNode: function () {	// 初始化节点
+        this.$subject = $('#j-subject');
+        this.$errorMsg = $('#errorMsg');
+        this.$submit = $('#submit');
+    },
+    addEvent: function () {	// 绑定事件
+        var that = this;
+        this.$submit.on('click', this.validate.bind(this));
+        $(document).on('keydown', function (e) {
+            var ev = e || window.event;
+            if (ev.keyCode === 13) {
+                that.validate();
+            }
+        });
+    },
+    checkLogin: function () {//判断用户是否登录
+        var accid = readCookie('uid');
+        if (accid == 'undefined' || accid == null || accid == '') {
+            alert('请登录之后再提交问题');
+            japp.helper.gotoPage('/login');
+        }
+    },
+    validate: function () {
+        this.$errorMsg.addClass('hide');
+        var that = this,
+                nickname = '',
+                accid = '',
+                subject = $.trim(this.$subject.val()),
+                errorMsg = '';
+        var user = readCookie("userinfo");
+        nickname = user.nickname;
+        accid = readCookie('uid');
+
+        if (subject.length === 0) {
+            errorMsg = '问题不能为空';
+        } else if (subject.length < 10) {
+            errorMsg = '问题不少于10个字，否则医生无法准确解答';
+        } else if (subject.length > 120) {
+            errorMsg = '问题字数请控制在120个字以内';
+        } else {
+            this.$submit.html('提交问题中...').attr('disabled', 'disabled');
+            this.doSendmsg(nickname, accid, subject);
+            this.$submit.html('提交问题').removeAttr('disabled');
+        }
+        this.$errorMsg.html(errorMsg).removeClass('hide');  // 显示错误信息
+        return false;
+    },
+    doSendmsg: function (nickname, accid, subject) {
+        var that = this;
+        var params = {
+            'sender_name': nickname,
+            'sender_accid': accid,
+            'subject': subject,
+        };
+        japp.ajax.call('user.addQuestion', {
+            data: params,
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (ret) {
+                if (ret.code === 200) {
+                    alert("问题提交成功，请等待医生回答");
+                    that.$subject.val('');
+                    japp.helper.gotoPage('/html/profile/index');
+                } else {
+                    that.$errorMsg.html(ret.message).removeClass('hide');
+                    that.$submit.html('提交问题').removeAttr('disabled');
+                }
+            },
+            error: function () {
+                that.$errorMsg.html('请求失败，请重试');
+            }
+        });
+    },
+    /**
+     * 获取浏览器的名称和版本号信息
+     */
+    getBrowser: function () {
+        var browser = {
+            msie: false,
+            firefox: false,
+            opera: false,
+            safari: false,
+            chrome: false,
+            netscape: false,
+            appname: 'unknown',
+            version: 0
+        }, ua = window.navigator.userAgent.toLowerCase();
+        if (/(msie|firefox|opera|chrome|netscape)\D+(\d[\d.]*)/.test(ua)) {
+            browser[RegExp.$1] = true;
+            browser.appname = RegExp.$1;
+            browser.version = RegExp.$2;
+        } else if (/version\D+(\d[\d.]*).*safari/.test(ua)) { // safari
+            browser.safari = true;
+            browser.appname = 'safari';
+            browser.version = RegExp.$2;
+        }
+        return browser.appname + ' ' + browser.version;
+    }
+};
+addquestion.init();

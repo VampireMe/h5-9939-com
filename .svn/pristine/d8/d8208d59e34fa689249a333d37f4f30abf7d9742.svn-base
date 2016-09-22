@@ -1,0 +1,13 @@
+
+<article class="bocon compl shagin diacl usymt">
+    <h3 class="tinfo" portion = 'name'>
+        {name}
+        <span>介绍</span>
+    </h3>
+    <p class="inde" portion = "jianjie">
+        {description}
+    </p>
+    <a class="shic">分享</a>
+</article>
+
+

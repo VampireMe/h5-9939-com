@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>云信 Web Demo</title>
+        <link rel="stylesheet" href="/scripts/rongyun/css/base.css"/>
+        <link rel="stylesheet" href="/scripts/rongyun/css/animate.css"/>
+        <link rel="stylesheet" href="/scripts/rongyun/css/index.css?v=1"/>
+        <link rel="icon" href="/scripts/rongyun/images/icon.ico" type="image/x-icon"/>
+    </head>
+    <body>
+        <div class="wrapper radius10px">
+            <form action="" method="post" class="m-register">
+                <div class="row tc">
+                    <span class="type">用 户 名：</span>
+                    <input type="text" class="radius5px box-sizing repassword" id="username" autofocus="autofocus" autocomplete="on" placeholder="限20位字母或者数字"  maxlength="20" value="admin2"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">email地址：</span>
+                    <input type="text" class="radius5px box-sizing repassword" id="email" autofocus="autofocus" autocomplete="on" placeholder="请填写正确email地址" maxlength="30" value="admin2@163.com"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">昵　　称：</span>
+                    <input type="text" class="radius5px box-sizing repassword" id="nickname" autofocus="autofocus" autocomplete="on" placeholder="限10位汉字、字母或者数字" maxlength="10" value="admin2"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">密　　码：</span>
+                    <input type="password" class="radius5px box-sizing repassword" id="password" placeholder="6~20位字母或者数字"  maxlength="20" value="111111"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">确认密码：</span>
+                    <input type="password" class="radius5px box-sizing repassword" id="password1" placeholder="请再次输入密码"  maxlength="20" value="111111"/>
+                </div>
+                
+                <div class="row tc">
+                    <span class="type">真实姓名：</span>
+                    <input type="text" class="radius5px box-sizing repassword" id="truename" autofocus="autofocus" autocomplete="on" placeholder="限10位汉字、字母或者数字" maxlength="10" value="张三"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">就职医院：</span>
+                    <input type="text" class="radius5px box-sizing repassword" id="hospital" autofocus="autofocus" autocomplete="on" placeholder="限20位汉字、字母或者数字" maxlength="30" value="北京协和医院"/>
+                </div>
+                <div class="row tc">
+                    <span class="type">单位电话：</span>
+                    <div style="width:280px;border:1px solid #ddd;padding:10px 0 10px 76px;background:#fff;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;margin:0 auto; text-align:left;">
+                        <input type="text" class="shortipt tc" style="width:35px;" id="qh" autofocus="autofocus" autocomplete="on" placeholder="区号" maxlength="4" value="010"/>
+                        <p style="float:left;margin-right:5px;">-</p>
+                        <input type="text" class="shortipt tl" style="width:145px;" id="dwdh" autofocus="autofocus" autocomplete="on" placeholder="请填写正确电话号码" maxlength="8" value="12345678"/>
+                        <div class="clr"></div>
+                    </div>
+                    
+                </div>
+                <div class="row tc">
+                    <span class="type">您的手机：</span>
+                    <input type="text" class="radius5px box-sizing repassword" id="phone" autofocus="autofocus" autocomplete="on" placeholder="请输入正确11位数字" maxlength="11" value="13812345678"/>
+                </div>
+                
+                <input type="hidden" id="utype" name="utype" value="2" />
+                <input type="hidden" id="source" name="source" value="3" />
+
+                <div class="row">
+                    <div class="error-msg hide" id="errorMsg">此帐号已存在</div>
+                </div>
+                <div class="row tc">
+                    <button type="button" class="btn btn-login" id="submit">注册</button>
+                </div>
+            </form>
+            <div class="u-redirect"><a href="./index.html">已有帐号？直接登录</a></div>
+        </div>
+        <div class="footer tc">
+            <p class="hide">为了更好地体验本Demo，建议您使用IE10、Chrome、FireFox、Safari、360等主流浏览器。</p>
+            <p>&copy;1997 - 2016 网易公司版权所有</p>
+        </div>
+        <script src="/scripts/jquery-1.11.3.min.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+        <script src="/scripts/rongyun/config.js"></script>
+        <script src="/scripts/rongyun/md5.js"></script>
+        <script src="/scripts/bll/register_doctor.js"></script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>我的医生</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<article class="head"><a href=""></a>我的医生</article>
+<ul class="docli">
+<li><img src="/patients/styles/images/doc.jpg" alt="">
+<h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a>
+</li>
+<li><img src="/patients/styles/images/doc.jpg" alt=""><h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a></li>
+<li><img src="/patients/styles/images/doc.jpg" alt=""><h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a></li>
+<li><img src="/patients/styles/images/doc.jpg" alt=""><h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a></li>
+<li><img src="/patients/styles/images/doc.jpg" alt=""><h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a></li>
+<li><img src="/patients/styles/images/doc.jpg" alt=""><h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a></li>
+<li><img src="/patients/styles/images/doc.jpg" alt=""><h3>郭晓明</h3><p><span>主任医师</span><span>消化内科</span></p><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">立即咨询</a></li>
+</ul>
+</body>
+</html>

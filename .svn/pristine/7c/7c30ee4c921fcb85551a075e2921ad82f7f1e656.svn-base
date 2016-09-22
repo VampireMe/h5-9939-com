@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+</head>
+<body class="bodb">
+<article class="head"><a href=""></a>个人信息</article>
+<section class="caninf perim ntoux">
+<a href="">头像<b><img src="images/user.png" alt=""></b></a>
+<a href="/patients/views/user/nickname.html" class="clcon">昵称<span>大喜不是我</span></a>
+<div class="thre catop"></div>
+<a href="/patients/views/user/sex.html">性别<span>男</span></a>
+<a href="/patients/views/user/phone_modify.html">手机号码<span>18811557278</span></a>
+<a href="/patients/views/user/pw_modify.html">修改密码</a>
+</section>
+<a href="" class="quit">提交信息</a>
+</body>
+</html>

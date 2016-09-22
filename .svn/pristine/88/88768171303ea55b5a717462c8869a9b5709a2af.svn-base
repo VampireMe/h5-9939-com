@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+<script src="/scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/patients/scripts/jquery.event.drag-1.5.min.js"></script>
+<script type="text/javascript" src="/patients/scripts/jquery.touchSlider.js"></script>
+<!--<script type="text/javascript" src="/patients/scripts/slide.js"></script>-->
+<script type="text/javascript" src="/patients/scripts/detail.js"></script>
+<script type="text/javascript" src="/patients/scripts/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="/scripts/japp.js"></script>
+<script type="text/javascript" src="/scripts/japp.ajax.js"></script>
+<script type="text/javascript" src="/scripts/japp.helper.js"></script>
+</head>
+<body>
+<article class="head infhe">资 讯</article>
+<div class="loading" style="line-height:1.9rem;">loading...</div>
+<div class="maincontent" class="maincontent" style="display:none">
+<nav class="nainf">
+    <div id="ho2">
+        <a href="#" data-id="0" class="curre">热点</a>
+    </div>
+    <a class="order">+订阅</a>
+</nav>
+<div class="main_visual">
+	<div class="main_image main_wor">
+		<ul>
+			<li><a href=""><span class="img_4"><img src="/patients/styles/images/inf.jpg"></span><p>没有没有什么病就是性功能弱如何调没有没有什么病就是性功能弱如何调整什么病就是性功能弱如何调整整什么病就是性功能弱如何调整？</p></a></li>
+			<li><a href=""><span class="img_4"><img src="/patients/styles/images/img_main_3.jpg"></span><p>没有没有什么病就是性功能弱如何调没有没有什么病就是性功能弱如何调整什么病就是性功能弱如何调整整什么病就是性功能弱如何调整？</p></a></li>
+			<li><a href=""><span class="img_1"><img src="/patients/styles/images/img_main_5.jpg"></span><p>没有没有什么病就是性功能弱如何调整什么病就是性功能弱如何调整？</p></a></li>
+		</ul>
+        <a href="javascript:void(0);" id="btn_prev"></a>
+		<a href="javascript:void(0);" id="btn_next"></a>
+	</div>
+</div>
+<ul class="infoli conal list1">
+    
+</ul>
+<article class="chance"><a href=""><h3>#科学坐月子—给你一次美丽重生的机会#</h3><p>产科副主任医师，25年临床经验为您解答月子期保养秘笈，<br/>快来提问...</p></a></article>
+<div class="thre"></div>
+
+<h2 class="rec zjtj">专家推荐</h2>
+<ul class="docli desper clicl zjtj"><li><img src="/patients/styles/images/doc.jpg" alt=""><h3>郭晓明<span>内科</span></h3><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">向TA提问</a></li><li><img src="/patients/styles/images/doc.jpg" alt=""><h3>郭晓明<span>内科</span></h3><p class="goda">擅长：高血压，糖尿病，慢性支气管炎，心脑慢性支气管炎，心脑</p><a href="">向TA提问</a></li></ul>
+
+<div class="thre"></div>
+<ul class="infoli conal list2">
+    
+</ul>
+<div class="blank"></div>
+<footer><a href=""><div></div><p>首页</p></a><a href="" class="curr"><div></div><p>资讯</p></a><a href=""><div></div><p></p></a><a href=""><div></div><p>消息</p></a><a href=""><div></div><p>我的</p></a><div class="asdo"><a href="">问 医</a></div></footer>
+<!--订阅-->
+<div class="oubra disn"></div>
+<article class="purcha disn"><div class="myor"><h3>我的订阅</h3><p>选择兴趣类别，推荐更适合您口味的内容</p></div><ul class="spinf"><li><div><a href="" class="cus">新闻</a></div><div><a href="">母婴</a></div><div><a href="">两性</a></div></li><li><div><a href="">女性</a></div><div><a href="">美容</a></div><div><a href="">减肥</a></div></li><li><div><a href="">心理</a></div><div><a href="">保健</a></div><div><a href="">疾病</a></div></li></ul><a class="over">完成</a><div class="closw"><a></a></div></article>
+</div>
+<script type="text/javascript">
+    (function(){
+       var article_list = {
+           init:function(){
+             this.aticleData(0);  
+             this.rollEvent();
+             this.clickEvent();
+           },
+           rollEvent:function(){
+               $(window).on('scroll',this.rollLoading.bind(this));
+           },
+           clickEvent:function(){
+               $("#ho2").delegate('#mCSB_1 #mCSB_1_container a', "click", this.showDialog.bind(this));
+           },
+           showDialog:function(abc){
+               console.log(abc);
+               var id = abc.target.dataset.id;
+               this.aticleData(id);  
+            },
+           aticleData:function(id){
+               var data = {
+                   'catid': id,
+               };
+               var that=this;
+               japp.ajax.call('news.getArticleList',{
+                   'data': data,
+                    'beforeSend': function () {},
+                    'success': function (ret) {
+                        if(ret.code==200){
+                            that.navappend(ret.data.article_category,id);
+                            that.list1append(ret.data.article_list1);
+                            that.list2append(ret.data.article_list2);
+                            $(".loading").hide();
+                            $(".maincontent").show();
+                            that.lunboaa();
+                        }else{
+                            return false;
+                        }
+                    },
+                    error: function () {
+                        console.log('请求失败，请重试');
+                    }
+               });
+           },
+           /**
+            * 下拉加载更多
+            * @returns {undefined}
+            */
+           rollLoading:function(){
+//               alert('aaaa');
+//              var pages = $("#noticePage").val();
+//              // 当滚动到最底部以上100像素时， 加载新内容
+//		if(japp.helper.checkIsScrollToBottom && pages==v){
+//                    v=v+1;
+//                    this.noticle_data(parseInt(pages)+1);
+//                }
+            },
+            /**
+             * 渲染导航
+             * @param {type} category
+             * @param {type} id
+             * @returns {undefined}
+             */
+            navappend:function(category,id){
+                var nav ='<a href="#" data-id="0" class="curre">热点</a>';
+                $("#mCSB_1_container a").remove();
+                $.each(category, function(k,val2){
+                    if(val2.catid==id){
+                        $("a").removeClass("curre"); 
+                        nav +='<a href="#" data-id="'+val2.catid+'" class="curre">'+val2.catname+'</a>';
+                        $(".zjtj").css('display','none');
+                    }else{
+                        nav +='<a href="#" data-id="'+val2.catid+'">'+val2.catname+'</a>';
+                    }
+                });
+                $("#mCSB_1_container").append(nav);
+            },
+            list1append:function(list1){
+                var html='';
+                $(".list1 li").remove();
+                $.each(list1, function(i,val){
+                  var time = japp.helper.date('Y-m-d',val.inputtime);
+                  var title_count = val.title.length;
+                  if(title_count>12){
+                      val.title = val.title.substring(0,12)+'...';
+                  }
+                    html +='<li><a href=""><img src="'+val.thumb+'" alt=""><div><h3>'+val.title+'</h3><p><span>'+val.category.substring(0,4)+'<em></em>'+time+'</span><span>收藏0</span></p></div></a></li>';
+                });
+                $(".list1").append(html);
+            },
+            /**
+             * 渲染咨询列表2
+             * @param {type} list2
+             * @returns {undefined}
+             */
+            list2append:function(list2){
+                var html1='';
+                $(".list2 li").remove();
+                $.each(list2, function(ii,val1){
+                  var time = japp.helper.date('Y-m-d',val1.inputtime);
+                  var title_count = val1.title.length;
+                  if(title_count>12){
+                      val1.title = val1.title.substring(0,12)+'...';
+                  }
+                  html1 +='<li><a href=""><img src="'+val1.thumb+'" alt=""><div><h3>'+val1.title+'</h3><p><span>'+val1.category+'<em></em>'+time+'</span><span>收藏0</span></p></div></a></li>';
+                });
+                $(".list2").append(html1);
+            },
+            /**
+             * 重新加载轮播图
+             * @returns {undefined}
+             */
+            lunboaa:function(){ 
+                $(".main_visual").hover(function(){
+                        $("#btn_prev,#btn_next").fadeIn()
+                },function(){
+                        $("#btn_prev,#btn_next").fadeOut()
+                });
+                $dragBln = false;
+                $(".main_image").touchSlider({
+                        flexible : true,
+                        speed : 200,
+                        btn_prev : $("#btn_prev"),
+                        btn_next : $("#btn_next"),
+                        paging : $(".flicking_con a,.flicking_c a"),
+                        counter : function (e){
+                                $(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+                                $(".flicking_c a").removeClass("on").eq(e.current-1).addClass("on");
+                        }
+                });
+                $(".main_re").touchSlider({
+                        flexible : true,
+                        speed : 200,
+                });
+
+                $(".main_image,.main_re").bind("mousedown", function() {
+                        $dragBln = false;
+                });
+                $(".main_image,.main_re").bind("dragstart", function() {
+                        $dragBln = true;
+                });
+                $(".main_image a,.main_re").click(function(){
+                        if($dragBln) {
+                                return false;
+                        }
+                });
+                timer = setInterval(function(){
+                        $("#btn_next").click();
+                }, 5000);
+                $(".main_visual").hover(function(){
+                        clearInterval(timer);
+                },function(){
+                        timer = setInterval(function(){
+                                $("#btn_next").click();
+                        },5000);
+                });
+                $(".main_image,.main_re").bind("touchstart",function(){
+                        clearInterval(timer);
+                }).bind("touchend", function(){
+                        timer = setInterval(function(){
+                                $("#btn_next").click();
+                        }, 5000);
+                });
+            },
+       }
+       article_list.init();
+    }())
+</script>
+</body>
+</html>

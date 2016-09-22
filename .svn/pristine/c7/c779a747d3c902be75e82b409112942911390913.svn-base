@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>系统设置</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+<script type="text/javascript" src="/patients/scripts/jquery-1.7.1.min.js"></script>
+<script src="js/detail.js"></script>
+</head>
+<body class="bodb">
+<article class="head"><a href=""></a>设置</article>
+<section class="caninf">
+<a href="">消息设置</a>
+<a href="" class="clcon">清除缓存</a>
+<div class="thre catop"></div>
+<a href="">给我们评价</a>
+<a href="">分享好友</a>
+<a href="">声明</a>
+</section>
+<a href="" class="quit">退出账号</a>
+<!--退出账号弹出层-->
+<div class="oubra"></div>
+<article class="qla"><p>您确认退出当前账号</p><p><a href="">确认</a><a>取消</a></p></article>
+</body>
+</html>

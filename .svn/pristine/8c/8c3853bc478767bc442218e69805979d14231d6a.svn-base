@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<article class="head"><a href=""></a>疾病百科</article>
+<form action="/jbzz/" method="get" class="frmly ">
+    <input type="search" name="key" id="key" value="" placeholder="请输入疾病名、症状名">
+    <input type="submit" value=" " onclick="return soso();">
+</form>
+<div class="thre"></div>
+<h2 class="hepla">常见疾病</h2>
+<article class="clsa regul dsia"><a>艾滋病</a><a>手足口病</a><a>前列腺炎</a><a>宫颈糜烂</a><a>糖尿病</a><a>高血压</a><a>肾虚</a><a>痔疮</a><a>尖锐湿疣</a><a>荨麻疹</a><a>宫外孕</a><a>胃癌</a></article>
+<div class="thre"></div>
+<h2 class="hepla"><a href="">更多<span>></span></a>按人群查找</h2>
+<article class="clsa regul dsia"><a>男性</a><a>女性</a><a>儿童</a><a>老人</a><a>孕妇</a><a>职业病</a></article>
+<div class="thre"></div>
+<h2 class="hepla"><a href="">更多<span>></span></a>按部位查找</h2>
+<article class="clsa regul dsia"><a>头部</a><a>颈部</a><a>胸部</a><a>腹部</a><a>腰部</a><a>男性生殖</a><a>女性生殖</a><a>臀部</a><a>盆腔</a><a>上肢</a><a>下肢</a><a>背部</a><a>骨头</a><a>心理</a><a>全身</a><a>其他</a></article>
+<div class="thre"></div>
+<h2 class="hepla"><a href="">更多<span>></span></a>按科室查找</h2>
+<article class="clsa regul dsia"><a>内科</a><a>外科</a><a>妇产科</a><a>五官科</a><a>男科</a><a>皮肤性病科</a><a>生殖健康</a><a>老年科</a><a>肿瘤科</a><a>传染科</a><a>中西结合科</a><a>精神心理科</a></article>
+</body>
+</html>

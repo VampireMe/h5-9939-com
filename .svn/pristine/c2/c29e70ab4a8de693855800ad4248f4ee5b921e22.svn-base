@@ -1,0 +1,30 @@
+<!--#include file="/patients/views/include/header_profile.html" -->
+
+<article class="head"><a href="javascript:"></a>我的问题</article>
+<article class="notice"  data-container="c-talklist">
+</article>
+
+<!-- 退出确认框 -->
+<div class="dialog radius5px hide" id="j-logoutDialog" style="display:none;">
+    <span class="icon icon-close" id="j-closeDialog"></span>
+    <div class="content tc">确定要退出吗？</div>
+    <div class="buttons tc">
+        <button class="btn radius4px btn-cancel" id="j-cancelBtn">取消</button>
+        <button class="btn radius4px btn-ok" id="j-okBtn">确定</button>
+    </div>
+</div>
+
+<div id="j-mask" class="mask hide"></div>
+
+
+
+<script src="/scripts/model/loginuser.js"></script>
+<script src="/scripts/bll/profile.js"></script>
+
+<script src="/scripts/rongyun/config.js"></script>
+<script src="/scripts/rongyun/util.js?v=2"></script>
+<script src="/scripts/rongyun/cache.js?v=2"></script>
+<script src="/scripts/bll/appui.js?v=2"></script>
+<script src="/scripts/bll/appim.js?v=2"></script>
+
+<!--#include file="/patients/views/include/footer.html" -->

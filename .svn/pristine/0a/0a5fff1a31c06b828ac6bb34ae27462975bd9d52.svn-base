@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人中心</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<article class="head cabot">个人中心</article>
+<section class="person"><img src="/patients/styles/images/unuser.png" alt=""><p>伟大的航海王</p></section>
+<section class="caninf myans">
+<a href="/patients/html/user/question.html"><span></span>我的提问</a>
+<a href="/patients/html/user/doctor.html" class="clcon"><span></span>我的医生</a>
+<div class="thre catop"></div>
+<a href="/patients/html/user/collection.html"><span></span>我的收藏</a>
+<a href="/patients/html/user/system.html"><span></span>系统设置</a>
+<a href="/patients/html/user/feedback.html"><span></span>意见反馈</a>
+</section>
+<footer><a href=""><div></div><p>首页</p></a><a href=""><div></div><p>资讯</p></a><a href=""><div></div><p></p></a><a href=""><div></div><p>消息</p></a><a href="" class="curr"><div></div><p>我的</p></a><div class="asdo"><a href="">问 医</a></div></footer>
+</body>
+</html>

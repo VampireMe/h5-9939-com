@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>h5页面测试</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="/scripts/jquery-1.10.2.min.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script type="text/javascript">
+            var from = 'patients';//patients
+            switch (from) {
+                case "doctor":
+                {
+                    japp.helper.gotoPage('/doctor/login');
+                    break;
+                }
+                case "patients":
+                {
+                    japp.helper.gotoPage('/patients/login');
+                    break;
+                }
+            }
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

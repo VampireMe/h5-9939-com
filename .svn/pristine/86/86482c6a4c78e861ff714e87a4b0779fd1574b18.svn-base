@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人信息</title>
+<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="applicable-device" content="mobile">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="/patients/styles/css/style.css" rel="stylesheet"/>
+<script src="/scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/scripts/japp.js"></script>
+</head>
+<body class="bodb">
+<div class="loading" style="line-height:1.9rem;">loading...</div>
+<div class="maincontent" style="display: none">
+<article class="head"><a href=""></a>个人信息</article>
+<section class="caninf perim ntoux">
+<a href="#" class="modify_image">头像<b><img src="{pic}" alt=""></b></a>
+<a href="/patients/views/user/nickname.html" class="clcon">昵称<span>{nickname}</span></a>
+<div class="thre catop"></div>
+<a href="/patients/views/user/sex.html">性别<span>{gender}</span></a>
+<a href="/patients/views/user/phone_modify.html">手机号码<span>{mobile}</span></a>
+<a href="/patients/views/user/pw_modify.html">修改密码</a>
+</section>
+<a href="" class="quit">提交信息</a>
+</div>
+</body>
+<script type="text/javascript" src="/patients/scripts/user/personal.js"></script>
+</html>
+

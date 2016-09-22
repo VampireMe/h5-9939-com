@@ -1,0 +1,40 @@
+(function () {
+    var _loginuser = {
+    };
+
+    //----------------------------------------------
+    //函数名：login
+    //说  明：用户登录,设置缓存信息
+    //----------------------------------------------
+    _loginuser.login = function (data) {
+        setCookie('userinfo', data);
+        setCookie('uid', data.accid);
+        setCookie('sdktoken', data.token);
+    };
+
+    //----------------------------------------------
+    //函数名：logout
+    //说  明：登录用户注销后清除用户缓存
+    //----------------------------------------------
+    _loginuser.logout = function () {
+        delCookie('uid');
+        delCookie('sdktoken');
+        delCookie('userinfo');
+    };
+
+    //----------------------------------------------
+    //函数名：get
+    //说  明：获取用户所有信息
+    //----------------------------------------------
+    _loginuser.get = function () {
+        var user = readCookie("userinfo");
+        return  user;
+    };
+
+    _loginuser.reset = function () {
+        delCookie("to_accid");
+        delCookie("scene");
+    };
+
+    window.loginuser = _loginuser;
+}());

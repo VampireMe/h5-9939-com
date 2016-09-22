@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title view-title="name">{name}</title>
+        <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="applicable-device" content="mobile">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" type="text/css" href="/patients/styles/css/style.css">
+    </head>    
+    <body>
+        <div class="loading" style="line-height:1.9rem;">loading...</div>
+        
+        <div class="maincontent" class="maincontent" style="display: none">
+            <article class="head closbt">
+                <a href=""></a>
+                <a href="" class="close">关闭</a>
+                <div class="css_title" view-title="name">{name}</div>
+            </article>
+            <article class="fana clearfix" view-pinyin="pinyin_initial">
+                <a href="/patients/views/symptom/index.html?pinyin={pinyin_initial}" class="cup">症状首页</a>
+                <a href="/patients/views/symptom/introduce.html?pinyin={pinyin_initial}">症状知识</a>
+                <a href="/patients/views/symptom/article.html?pinyin={pinyin_initial}">症状文章</a>
+            </article>
+            <article class="spnic">
+                <h3 view-title="name">{name}</h3>
+                <div class="imarr moim">
+                    <a href="" view-title="name"><img src="{thumbnail}" alt=""></a>
+                    <p class="inde">
+                        {description}
+                        <a href="">查看更多</a>
+                    </p>
+                </div>
+            </article>
+            <div class="thre"></div>
+            <h3 class="probal">可能患有的疾病</h3>
+            <article class="raatu prob" data-disease="reldisease">
+                
+<!--                <a href=""><h3>中东呼吸综合征</h3><p>伴随症状：糖尿病 肾病 高血压 心脏病 糖尿病 肾病</p></a>
+                <a href=""><h3>泛支气管炎</h3><p>伴随症状：糖尿病 肾病 高血压 心脏病 糖尿病</p></a>
+                <a href=""><h3>中东呼吸综合征</h3><p>伴随症状：糖尿病 肾病 高血压 心脏病 糖尿病 肾病</p></a>-->
+                
+            </article>
+            <div class="thre"></div>
+            <article class="spacu cause" view-pinyin="pinyin_initial">
+                <a href="/patients/views/symptom/cause.html?pinyin={pinyin_initial}">
+                    <img src="/patients/styles/images/sp_02.png" alt="">
+                    <h3 view-title="name">{name}<span>病因</span></h3><p>{cause}</p>
+                    <div></div>
+                </a>
+                <a href="/patients/views/symptom/prevent.html?pinyin={pinyin_initial}">
+                    <img src="/patients/styles/images/sp_05.png" alt="">
+                    <h3 view-title="name">{name}<span>预防</span></h3><p>{relieve}</p>
+                    <div></div>
+                </a>
+                <a href="/patients/views/symptom/examine.html?pinyin={pinyin_initial}">
+                    <img src="/patients/styles/images/sp_04.png" alt="">
+                    <h3 view-title="name">{name}<span>检查</span></h3><p>{examine}</p>
+                    <div></div>
+                </a>
+                <a href="/patients/views/symptom/food.html?pinyin={pinyin_initial}">
+                    <img src="/patients/styles/images/sp_07.png" alt="">
+                    <h3 view-title="name">{name}<span>食疗</span></h3><p>{goodfood}</p>
+                    <div></div>
+                </a>
+            </article>
+            <div class="thre"></div>
+            <h2 class="hepla syart">口唇疱疹<span>文章</span></h2>
+            <article class="male loswei cand">
+                <section class="sechoi" view-pinyin="pinyin_initial">
+                    <ul class="rade" view-list="articlelist">
+                        {articlelist}
+                    </ul>
+                    <a href="/patients/views/symptom/article.html?pinyin={pinyin_initial}" class="fimor every">点击查看更多</a>
+                </section>
+            </article>
+            <div class="thre"></div>
+            <h2 class="hepla">相关内容</h2>
+            <article class="dicon">
+                <h2 class="disre">相关内容</h2>
+                <div class="conra" view-pinyin="pinyin_initial">
+                    <a href="/patients/views/symptom/examine.html?pinyin={pinyin_initial}">检查</a>
+                    <a href="/patients/views/symptom/cause.html?pinyin={pinyin_initial}">病因</a>
+                    <a href="/patients/views/symptom/prevent.html?pinyin={pinyin_initial}">预防</a>
+                    <a href="/patients/views/symptom/food.html?pinyin={pinyin_initial}">食疗</a>
+                </div>
+            </article>
+            <div class="foot" view-pinyin="pinyin_initial"><a href="/patients/views/symptom/online.html?pinyin={pinyin_initial}">咨询值班医生</a></div>
+        </div>
+        <!--引入js start-->
+        <script src="/scripts/jquery-1.11.3.min.js"></script>
+        <script src="/scripts/japp.js"></script>
+        <script src="/scripts/japp.helper.js"></script>
+        <script src="/scripts/japp.ajax.js"></script>
+        <script src="/patients/scripts/symptom/symptom.index.js"></script>
+        <script src="/patients/scripts/symptom/detail.js"></script>
+        <!--引入js end-->
+    </body>
+</html>
